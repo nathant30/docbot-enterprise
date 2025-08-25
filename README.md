@@ -4,12 +4,6 @@
 
 DocBot Enterprise is a production-ready, AI-powered invoice processing system that automates data extraction, validation, and ERP integration with 96%+ accuracy. Built for businesses processing high volumes of invoices with enterprise-grade security and scalability.
 
-### 💰 Business Value
-- **$12,000+ per client** value proposition
-- **96%+ profit margins** on implementation
-- **48-hour delivery** from setup to production
-- **ROI within 30 days** for most clients
-
 ## ✨ Features
 
 ### Core Capabilities
