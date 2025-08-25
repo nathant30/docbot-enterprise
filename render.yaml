@@ -1,8 +1,6 @@
 services:
   - type: pserv
     name: docbot-postgres
-    databaseName: docbot
-    databaseUser: docbot
     plan: starter
 
   - type: web
