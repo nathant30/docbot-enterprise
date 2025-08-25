@@ -5,7 +5,7 @@ services:
 
   - type: web
     name: docbot-backend
-    env: python
+    runtime: python
     plan: starter
     buildCommand: cd backend && pip install -r requirements.txt
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
@@ -21,13 +21,10 @@ services:
 
   - type: web
     name: docbot-frontend
-    env: static
+    runtime: static
     plan: starter
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: frontend/build
     envVars:
       - key: REACT_APP_API_URL
-        fromService:
-          type: web
-          name: docbot-backend
-          property: url
+        value: "https://docbot-backend.onrender.com"
