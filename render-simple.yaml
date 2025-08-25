@@ -1,6 +1,8 @@
 services:
   - type: pserv
     name: docbot-postgres
+    databaseName: docbot
+    databaseUser: docbot
     plan: starter
 
   - type: web
@@ -10,14 +12,12 @@ services:
     buildCommand: cd backend && pip install -r requirements.txt
     startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: docbot-postgres
-          property: connectionString
       - key: SECRET_KEY
-        generateValue: true
+        value: docbot-enterprise-super-secret-key-production-2024
       - key: CORS_ORIGINS
         value: "*"
+      - key: DATABASE_URL
+        value: "postgresql://docbot:password@localhost:5432/docbot"
 
   - type: web
     name: docbot-frontend
