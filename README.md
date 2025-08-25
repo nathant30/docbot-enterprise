@@ -65,13 +65,6 @@ The system is built with a modern, scalable architecture:
 - **OCR**: Multi-provider support (Azure, Google, Tesseract)
 - **ERP**: QuickBooks, Xero, and custom integrations
 
-## 💼 Business Model
-
-### Revenue Streams
-1. **Implementation Services**: $12,000-$25,000 per client
-2. **Monthly SaaS**: $500-$2,000/month per client
-3. **Custom Integrations**: $5,000-$15,000 per ERP
-
 ### Target Market
 - Mid-market businesses (50-500 employees)
 - Accounting firms and bookkeepers
