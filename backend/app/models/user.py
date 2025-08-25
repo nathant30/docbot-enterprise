@@ -6,8 +6,8 @@ from sqlalchemy import Column, String, Boolean, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
-from models.base import BaseModel
-from core.security import hash_password, verify_password
+from app.models.base import BaseModel
+from app.core.security import hash_password, verify_password
 
 
 class User(BaseModel):

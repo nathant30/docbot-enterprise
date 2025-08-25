@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from typing import Dict, Any, Optional
 
-from models.base import BaseModel
+from app.models.base import BaseModel
 
 
 class Invoice(BaseModel):

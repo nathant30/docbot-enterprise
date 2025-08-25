@@ -11,9 +11,9 @@ from abc import ABC, abstractmethod
 import httpx
 import json
 
-from core.config import settings
-from models.invoice import Invoice
-from models.vendor import Vendor
+from app.core.config import settings
+from app.models.invoice import Invoice
+from app.models.vendor import Vendor
 
 logger = logging.getLogger(__name__)
 

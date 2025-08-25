@@ -6,7 +6,7 @@ from sqlalchemy import Column, DateTime, Integer
 from sqlalchemy.ext.declarative import declared_attr
 from datetime import datetime
 
-from core.database import Base
+from app.core.database import Base
 
 class TimestampMixin:
     """Mixin to add timestamp fields to models"""

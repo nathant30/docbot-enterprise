@@ -17,7 +17,7 @@ from fastapi import UploadFile, HTTPException, status
 from PIL import Image
 import PyPDF2
 
-from core.config import settings
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

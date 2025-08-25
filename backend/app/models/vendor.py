@@ -5,7 +5,7 @@ DocBot Enterprise - Vendor Model
 from sqlalchemy import Column, String, Text, Numeric, Boolean
 from sqlalchemy.orm import relationship
 
-from models.base import BaseModel
+from app.models.base import BaseModel
 
 
 class Vendor(BaseModel):

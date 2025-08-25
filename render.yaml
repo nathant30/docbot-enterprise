@@ -2,7 +2,7 @@ services:
   # PostgreSQL Database
   - type: pserv
     name: docbot-postgres
-    env: node
+    env: postgresql
     plan: starter
     databases:
       - name: docbot
@@ -18,9 +18,8 @@ services:
     name: docbot-backend
     env: python
     plan: starter
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
-    rootDir: backend
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -35,31 +34,17 @@ services:
         generateValue: true
       - key: CORS_ORIGINS
         value: "https://docbot-frontend.onrender.com,http://localhost:3000"
-      - key: PYTHON_VERSION
-        value: "3.11"
 
   # React Frontend
   - type: web
     name: docbot-frontend
     env: static
     plan: starter
-    buildCommand: npm ci && npm run build
-    staticPublishPath: build
-    rootDir: frontend
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/build
     envVars:
       - key: REACT_APP_API_URL
         fromService:
           type: web
           name: docbot-backend
           property: url
-
-# Environment-specific configurations
-environments:
-  production:
-    services:
-      - name: docbot-backend
-        plan: standard
-      - name: docbot-frontend  
-        plan: standard
-      - name: docbot-postgres
-        plan: standard

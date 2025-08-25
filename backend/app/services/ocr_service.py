@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from datetime import datetime
 import json
 
-from core.config import settings
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

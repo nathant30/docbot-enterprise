@@ -12,14 +12,14 @@ import os
 from typing import List
 import logging
 
-from core.database import get_db, engine, Base
-from core.config import settings
-from core.security import verify_token, create_access_token
-from models.user import User
-from models.invoice import Invoice
-from models.vendor import Vendor
-from services.ocr_service import OCRService
-from services.file_service import FileService
+from app.core.database import get_db, engine, Base
+from app.core.config import settings
+from app.core.security import verify_token, create_access_token
+from app.models.user import User
+from app.models.invoice import Invoice
+from app.models.vendor import Vendor
+from app.services.ocr_service import OCRService
+from app.services.file_service import FileService
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
