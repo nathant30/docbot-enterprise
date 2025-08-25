@@ -1,0 +1,39 @@
+# Render Blueprint Configuration for DocBot Enterprise
+services:
+  # PostgreSQL Database
+  - type: pserv
+    name: docbot-postgres
+    databaseName: docbot
+    databaseUser: docbot
+    plan: starter
+
+  # FastAPI Backend
+  - type: web
+    name: docbot-backend
+    env: python
+    plan: starter
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: docbot-postgres
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: "*"
+
+  # React Frontend  
+  - type: web
+    name: docbot-frontend
+    env: static
+    plan: starter
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: docbot-backend
+          property: url
