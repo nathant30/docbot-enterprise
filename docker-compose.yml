@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: docbot-postgres
+    environment:
+      POSTGRES_DB: docbot
+      POSTGRES_USER: docbot
+      POSTGRES_PASSWORD: docbot_secure_password_2024
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docbot -d docbot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: docbot-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: docbot-backend
+    environment:
+      - DATABASE_URL=postgresql://docbot:docbot_secure_password_2024@postgres:5432/docbot
+      - REDIS_URL=redis://redis:6379
+      - SECRET_KEY=docbot-enterprise-super-secret-key-production-2024
+    volumes:
+      - ./uploads:/app/uploads
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: docbot-frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:

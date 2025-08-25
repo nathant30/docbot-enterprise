@@ -1,0 +1,16 @@
+project_name: "DocBot Enterprise"
+project_type: "multi-agent"
+
+agents:
+  - orchestrator-prime
+  - alice-backend
+  - bob-ocr-ai
+  - charlie-frontend
+  - diana-integration
+  - eve-infrastructure
+  - felix-qa-engineer
+
+contexts:
+  - MASTER_PRD.md
+  - requirements/*.md
+  - orchestrator/multi_agent_system.py
