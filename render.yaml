@@ -1,4 +1,3 @@
-previewsEnabled: true
 services:
   - type: pserv
     name: docbot-postgres
@@ -8,12 +7,10 @@ services:
 
   - type: web
     name: docbot-backend
-    runtime: python
+    env: python
     plan: starter
-    repo: https://github.com/nathant30/docbot-enterprise
-    rootDir: backend
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    buildCommand: cd backend && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -23,17 +20,13 @@ services:
         generateValue: true
       - key: CORS_ORIGINS
         value: "*"
-      - key: PYTHONPATH
-        value: /opt/render/project/src
 
   - type: web
     name: docbot-frontend
-    runtime: static
-    plan: starter  
-    repo: https://github.com/nathant30/docbot-enterprise
-    rootDir: frontend
-    buildCommand: npm ci && npm run build
-    staticPublishPath: build
+    env: static
+    plan: starter
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/build
     envVars:
       - key: REACT_APP_API_URL
         fromService:
