@@ -5,7 +5,6 @@ DocBot Enterprise - Database Configuration
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import QueuePool
 import logging
 
 from app.core.config import settings
@@ -15,11 +14,6 @@ logger = logging.getLogger(__name__)
 # Database engine configuration
 engine = create_engine(
     settings.DATABASE_URL,
-    poolclass=QueuePool,
-    pool_size=20,
-    max_overflow=30,
-    pool_pre_ping=True,
-    pool_recycle=3600,  # Recycle connections after 1 hour
     echo=False  # Set to True for SQL query logging
 )
 
