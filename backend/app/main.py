@@ -71,6 +71,36 @@ async def health_check():
         "version": "1.0.0"
     }
 
+@app.post("/api/v1/setup/demo", tags=["Setup"])
+async def create_demo_user(db: Session = Depends(get_db)):
+    """Create demo user for testing"""
+    demo_email = "demo@docbot.com"
+    
+    # Check if demo user already exists
+    existing_user = db.query(User).filter(User.email == demo_email).first()
+    if existing_user:
+        return {"message": "Demo user already exists", "email": demo_email}
+    
+    # Create demo user
+    demo_user = User(
+        email=demo_email,
+        first_name="Demo",
+        last_name="User",
+        is_admin=True
+    )
+    demo_user.set_password("password")
+    
+    db.add(demo_user)
+    db.commit()
+    db.refresh(demo_user)
+    
+    return {
+        "message": "Demo user created successfully",
+        "email": demo_email,
+        "password": "password",
+        "user_id": demo_user.id
+    }
+
 # Authentication endpoints
 @app.post("/api/v1/auth/login", tags=["Authentication"])
 async def login(email: str, password: str, db: Session = Depends(get_db)):
@@ -87,6 +117,41 @@ async def login(email: str, password: str, db: Session = Depends(get_db)):
         "access_token": access_token,
         "token_type": "bearer",
         "user_id": user.id
+    }
+
+@app.post("/api/v1/auth/register", tags=["Authentication"])
+async def register(
+    email: str, 
+    password: str, 
+    first_name: str = "Demo",
+    last_name: str = "User",
+    db: Session = Depends(get_db)
+):
+    """Register new user"""
+    # Check if user already exists
+    existing_user = db.query(User).filter(User.email == email).first()
+    if existing_user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="User with this email already exists"
+        )
+    
+    # Create new user
+    new_user = User(
+        email=email,
+        first_name=first_name,
+        last_name=last_name
+    )
+    new_user.set_password(password)
+    
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    
+    return {
+        "message": "User created successfully",
+        "user_id": new_user.id,
+        "email": new_user.email
     }
 
 @app.get("/api/v1/users/me", tags=["Users"])
