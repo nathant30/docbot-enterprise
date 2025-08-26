@@ -11,9 +11,10 @@ from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Database engine configuration
+# Database engine configuration - Force SQLite for deployment
+DATABASE_URL = "sqlite:///./docbot.db"
 engine = create_engine(
-    settings.DATABASE_URL,
+    DATABASE_URL,
     echo=False  # Set to True for SQL query logging
 )
 
