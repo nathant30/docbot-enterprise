@@ -4,7 +4,7 @@ DocBot Enterprise - Configuration Management
 
 import os
 from typing import List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
@@ -21,21 +21,23 @@ class Settings(BaseSettings):
     # API
     API_V1_STR: str = "/api/v1"
     
-    # CORS - Default origins, can be overridden via env var as JSON
-    CORS_ORIGINS: List[str] = Field(
-        default=[
-            "http://localhost:3000",
-            "http://localhost:8080", 
-            "https://localhost:3000",
-            "https://localhost:8080"
-        ]
-    )
+    # CORS - Use string that gets parsed to avoid environment variable conflicts
+    CORS_ORIGINS_STR: str = "http://localhost:3000,http://localhost:8080,https://localhost:3000,https://localhost:8080"
+    
+    @property
+    def CORS_ORIGINS(self) -> List[str]:
+        """Parse CORS origins from comma-separated string"""
+        return [origin.strip() for origin in self.CORS_ORIGINS_STR.split(",")]
     
     # File Upload
     MAX_UPLOAD_SIZE: int = 50 * 1024 * 1024  # 50MB
-    ALLOWED_UPLOAD_TYPES: List[str] = Field(
-        default=["pdf", "png", "jpg", "jpeg"]
-    )
+    ALLOWED_UPLOAD_TYPES_STR: str = "pdf,png,jpg,jpeg"
+    
+    @property
+    def ALLOWED_UPLOAD_TYPES(self) -> List[str]:
+        """Parse allowed upload types from comma-separated string"""
+        return [file_type.strip() for file_type in self.ALLOWED_UPLOAD_TYPES_STR.split(",")]
+    
     UPLOAD_DIRECTORY: str = "uploads"
     
     # OCR Configuration
