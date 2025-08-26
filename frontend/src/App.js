@@ -84,38 +84,22 @@ function Dashboard() {
   const [stats, setStats] = useState(null);
   
   React.useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('https://docbot-enterprise-backend.onrender.com/api/v1/stats/dashboard', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          setStats(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch stats:', error);
-      }
-    };
-    
-    fetchStats();
+    // Mock stats for demo without authentication
+    setStats({
+      total_invoices: 47,
+      pending_review: 8,
+      approved_invoices: 39,
+      total_amount: "23456.78"
+    });
   }, []);
   
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
         <h1>DocBot Enterprise Dashboard</h1>
-        <button 
-          onClick={() => {
-            localStorage.removeItem('token');
-            window.location.reload();
-          }}
-          style={{ padding: '8px 16px', backgroundColor: '#dc2626', color: 'white', border: 'none', borderRadius: '4px' }}
-        >
-          Logout
-        </button>
+        <div style={{ padding: '8px 16px', backgroundColor: '#059669', color: 'white', borderRadius: '4px' }}>
+          ✅ Demo Mode
+        </div>
       </div>
       
       {stats ? (
@@ -172,10 +156,8 @@ function InvoiceUpload() {
     formData.append('file', file);
     
     try {
-      const token = localStorage.getItem('token');
       const response = await fetch('https://docbot-enterprise-backend.onrender.com/api/v1/invoices/upload', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
         body: formData
       });
       
@@ -247,12 +229,7 @@ function InvoiceUpload() {
 
 // Main App Component
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('token'));
-  
-  if (!token) {
-    return <Login onLogin={setToken} />;
-  }
-  
+  // Skip authentication for now - directly show the dashboard
   return (
     <Router>
       <Routes>
@@ -260,6 +237,7 @@ function App() {
         <Route path="/upload" element={<InvoiceUpload />} />
         <Route path="/invoices" element={<div style={{padding: '20px'}}><Link to="/">← Dashboard</Link><h2>📋 Invoice List</h2><p>Feature coming soon...</p></div>} />
         <Route path="/vendors" element={<div style={{padding: '20px'}}><Link to="/">← Dashboard</Link><h2>🏢 Vendors</h2><p>Feature coming soon...</p></div>} />
+        <Route path="/login" element={<Login onLogin={() => {}} />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

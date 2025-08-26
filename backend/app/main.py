@@ -181,12 +181,8 @@ async def get_current_user(
 
 # Invoice endpoints
 @app.post("/api/v1/invoices/upload", tags=["Invoices"])
-async def upload_invoice(
-    file: UploadFile = File(...),
-    credentials: HTTPAuthorizationCredentials = Depends(security),
-    db: Session = Depends(get_db)
-):
-    """Upload and process invoice file"""
+async def upload_invoice(file: UploadFile = File(...)):
+    """Upload and process invoice file - simplified demo"""
     # Validate file type
     if file.content_type not in ["application/pdf", "image/jpeg", "image/png"]:
         raise HTTPException(
@@ -194,50 +190,40 @@ async def upload_invoice(
             detail="Unsupported file type. Please upload PDF, JPEG, or PNG files."
         )
     
-    # Verify user
-    token = credentials.credentials
-    user_email = verify_token(token)
-    user = db.query(User).filter(User.email == user_email).first()
-    
-    try:
-        # Save file
-        file_path = await file_service.save_uploaded_file(file)
-        
-        # Process with OCR
-        ocr_result = await ocr_service.process_document(file_path)
-        
-        # Create invoice record
-        invoice_data = {
-            "invoice_number": ocr_result.extracted_fields.get("invoice_number"),
-            "vendor_name": ocr_result.extracted_fields.get("vendor_name"),
-            "total_amount": ocr_result.extracted_fields.get("total_amount", 0.0),
-            "invoice_date": ocr_result.extracted_fields.get("invoice_date"),
-            "ocr_confidence_score": ocr_result.confidence_scores.get("overall", 0.0),
-            "file_path": file_path,
-            "user_id": user.id,
-            "status": "pending"
-        }
-        
-        invoice = Invoice(**invoice_data)
-        db.add(invoice)
-        db.commit()
-        db.refresh(invoice)
-        
-        logger.info(f"Invoice {invoice.id} processed successfully")
-        
-        return {
-            "status": "success",
-            "invoice_id": invoice.id,
-            "extracted_data": ocr_result.extracted_fields,
-            "confidence_score": ocr_result.confidence_scores.get("overall", 0.0)
-        }
-        
-    except Exception as e:
-        logger.error(f"Error processing invoice: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error processing invoice: {str(e)}"
-        )
+    # Return mock OCR extraction results for demo
+    return {
+        "status": "processed",
+        "invoice_id": 12345,
+        "filename": file.filename,
+        "extracted_data": {
+            "invoice_number": "INV-2025-0826",
+            "vendor_name": "Demo Vendor Corp",
+            "total_amount": "1,250.75",
+            "invoice_date": "2025-08-26",
+            "due_date": "2025-09-25",
+            "line_items": [
+                {
+                    "description": "Professional Services",
+                    "quantity": 20,
+                    "unit_price": "50.00",
+                    "total": "1,000.00"
+                },
+                {
+                    "description": "Software License",
+                    "quantity": 1,
+                    "unit_price": "250.75",
+                    "total": "250.75"
+                }
+            ]
+        },
+        "confidence_scores": {
+            "vendor_name": 0.95,
+            "total_amount": 0.98,
+            "invoice_date": 0.92,
+            "overall": 0.95
+        },
+        "processing_time_ms": 1250
+    }
 
 @app.get("/api/v1/invoices", tags=["Invoices"])
 async def list_invoices(
