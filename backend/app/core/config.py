@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     """Application settings"""
     
     # Database
-    DATABASE_URL: str = "postgresql+psycopg://docbot:password@localhost:5432/docbot"
+    DATABASE_URL: str = "sqlite:///./docbot.db"
     
     # Security
     SECRET_KEY: str = "docbot-enterprise-secret-key-change-in-production"
