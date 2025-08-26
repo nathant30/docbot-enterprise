@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import QueuePool
 import logging
 
-from core.config import settings
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

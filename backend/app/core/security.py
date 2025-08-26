@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from fastapi import HTTPException, status
 from typing import Optional, Dict, Any
 
-from core.config import settings
+from app.core.config import settings
 
 ALGORITHM = "HS256"
 
