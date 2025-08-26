@@ -4,6 +4,7 @@ Production-ready invoice automation system
 """
 
 from fastapi import FastAPI, HTTPException, Depends, UploadFile, File, status
+from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
@@ -102,11 +103,15 @@ async def create_demo_user(db: Session = Depends(get_db)):
     }
 
 # Authentication endpoints
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
 @app.post("/api/v1/auth/login", tags=["Authentication"])
-async def login(email: str, password: str, db: Session = Depends(get_db)):
+async def login(request: LoginRequest, db: Session = Depends(get_db)):
     """User authentication"""
-    user = db.query(User).filter(User.email == email).first()
-    if not user or not user.verify_password(password):
+    user = db.query(User).filter(User.email == request.email).first()
+    if not user or not user.verify_password(request.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials"
@@ -119,17 +124,17 @@ async def login(email: str, password: str, db: Session = Depends(get_db)):
         "user_id": user.id
     }
 
+class RegisterRequest(BaseModel):
+    email: str
+    password: str
+    first_name: str = "Demo"
+    last_name: str = "User"
+
 @app.post("/api/v1/auth/register", tags=["Authentication"])
-async def register(
-    email: str, 
-    password: str, 
-    first_name: str = "Demo",
-    last_name: str = "User",
-    db: Session = Depends(get_db)
-):
+async def register(request: RegisterRequest, db: Session = Depends(get_db)):
     """Register new user"""
     # Check if user already exists
-    existing_user = db.query(User).filter(User.email == email).first()
+    existing_user = db.query(User).filter(User.email == request.email).first()
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -138,11 +143,11 @@ async def register(
     
     # Create new user
     new_user = User(
-        email=email,
-        first_name=first_name,
-        last_name=last_name
+        email=request.email,
+        first_name=request.first_name,
+        last_name=request.last_name
     )
-    new_user.set_password(password)
+    new_user.set_password(request.password)
     
     db.add(new_user)
     db.commit()
