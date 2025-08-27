@@ -1,0 +1,25 @@
+INVOICE
+
+Invoice #: INV-2025-001
+Date: August 26, 2025
+
+Bill To:
+DocBot Enterprise
+123 Business Ave
+Suite 100
+New York, NY 10001
+
+From:
+ABC Consulting Services
+456 Service Road
+Los Angeles, CA 90210
+
+Description          Qty    Rate     Amount
+Professional Services  10   $150.00  $1,500.00
+Software License        1   $299.99    $299.99
+Tax (8.5%)                              $152.99
+
+                      Total: $1,952.98
+
+Payment Terms: Net 30
+Due Date: September 25, 2025

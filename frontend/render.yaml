@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: docbot-enterprise-frontend
+    env: static
+    plan: starter
+    repo: https://github.com/your-username/docbot-enterprise.git
+    branch: main
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: build
+    headers:
+      - path: "/*"
+        name: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+      - path: "/index.html"
+        name: "Cache-Control" 
+        value: "no-cache, no-store, must-revalidate"
+      - path: "/static/js/*"
+        name: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+      - path: "/static/css/*"
+        name: "Cache-Control"
+        value: "public, max-age=31536000, immutable"
+    routes:
+      - type: rewrite
+        source: "/*"
+        destination: "/index.html"
+    envVars:
+      - key: REACT_APP_API_URL
+        value: "https://docbot-enterprise-backend.onrender.com"
+      - key: NODE_ENV
+        value: "production"
