@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     
     # CORS - Use string that gets parsed to avoid environment variable conflicts
-    CORS_ORIGINS_STR: str = "http://localhost:3000,http://localhost:8080,https://localhost:3000,https://localhost:8080"
+    CORS_ORIGINS_STR: str = "http://localhost:3000,http://localhost:8080,https://localhost:3000,https://localhost:8080,https://docbot-enterprise.onrender.com,http://docbot-enterprise.onrender.com"
     
     @property
     def CORS_ORIGINS(self) -> List[str]:
