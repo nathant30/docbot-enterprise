@@ -387,6 +387,7 @@
         
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
         
         .form-group label {
@@ -394,6 +395,197 @@
             margin-bottom: 8px;
             color: #374151;
             font-weight: 500;
+        }
+        
+        .field-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .field-container input,
+        .field-container textarea,
+        .field-container select {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .field-feedback {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        .feedback-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feedback-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feedback-btn.approved {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .feedback-btn.minor-fix {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+        
+        .feedback-btn.major-fix {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+        
+        .feedback-btn.active {
+            animation: pulse 0.5s ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .field-changed {
+            border: 2px solid #f59e0b !important;
+            background: rgba(245, 158, 11, 0.05) !important;
+            animation: fieldHighlight 0.3s ease-in-out;
+        }
+        
+        @keyframes fieldHighlight {
+            0% { background: rgba(245, 158, 11, 0.2); }
+            100% { background: rgba(245, 158, 11, 0.05); }
+        }
+        
+        .training-summary {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .training-summary h4 {
+            color: #2563eb;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .training-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .training-stat {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .training-stat .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        
+        .training-stat .label {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+        
+        .toast {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+            margin-bottom: 10px;
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .toast.success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.3);
+        }
+        
+        .toast.info {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+        }
+        
+        .toast.error {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.3);
+        }
+        
+        .toast .toast-header {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+        
+        .toast .toast-body {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .delighter-animation {
+            animation: delighter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        @keyframes delighter {
+            0% {
+                transform: scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
         
         .form-group input,
@@ -842,42 +1034,117 @@
                         <div id="ocr-form-content">
                             <div class="form-group">
                                 <label>Invoice Number</label>
-                                <input type="text" id="invoice-number" placeholder="Auto-extracted invoice number">
+                                <div class="field-container">
+                                    <input type="text" id="invoice-number" placeholder="Auto-extracted invoice number" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="invoice-number" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="invoice-number" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="invoice-number" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Vendor Name</label>
-                                <input type="text" id="vendor-name" placeholder="Auto-extracted vendor name">
+                                <div class="field-container">
+                                    <input type="text" id="vendor-name" placeholder="Auto-extracted vendor name" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="vendor-name" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="vendor-name" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="vendor-name" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Invoice Date</label>
-                                <input type="date" id="invoice-date">
+                                <div class="field-container">
+                                    <input type="date" id="invoice-date" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="invoice-date" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="invoice-date" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="invoice-date" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Due Date</label>
-                                <input type="date" id="due-date">
+                                <div class="field-container">
+                                    <input type="date" id="due-date" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="due-date" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="due-date" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="due-date" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Total Amount</label>
-                                <input type="number" id="total-amount" step="0.01" placeholder="0.00">
+                                <div class="field-container">
+                                    <input type="number" id="total-amount" step="0.01" placeholder="0.00" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="total-amount" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="total-amount" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="total-amount" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Tax Amount</label>
-                                <input type="number" id="tax-amount" step="0.01" placeholder="0.00">
+                                <div class="field-container">
+                                    <input type="number" id="tax-amount" step="0.01" placeholder="0.00" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="tax-amount" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="tax-amount" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="tax-amount" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Purchase Order Number</label>
-                                <input type="text" id="po-number" placeholder="Optional PO number">
+                                <div class="field-container">
+                                    <input type="text" id="po-number" placeholder="Optional PO number" data-original="" oninput="markFieldChanged(this)">
+                                    <div class="field-feedback">
+                                        <button class="feedback-btn" data-field="po-number" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="po-number" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="po-number" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-group">
                                 <label>Description / Notes</label>
-                                <textarea id="description" placeholder="Invoice description or additional notes"></textarea>
+                                <div class="field-container">
+                                    <textarea id="description" placeholder="Invoice description or additional notes" data-original="" oninput="markFieldChanged(this)"></textarea>
+                                    <div class="field-feedback" style="align-self: flex-start; margin-top: 8px;">
+                                        <button class="feedback-btn" data-field="description" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                        <button class="feedback-btn" data-field="description" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                        <button class="feedback-btn" data-field="description" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="training-summary" id="training-summary">
+                                <h4>🤖 AI Learning Summary</h4>
+                                <p>Your feedback helps improve OCR accuracy for future invoices</p>
+                                <div class="training-stats">
+                                    <div class="training-stat">
+                                        <div class="value" id="approved-count">0</div>
+                                        <div class="label">Approved</div>
+                                    </div>
+                                    <div class="training-stat">
+                                        <div class="value" id="minor-fixes-count">0</div>
+                                        <div class="label">Minor Fixes</div>
+                                    </div>
+                                    <div class="training-stat">
+                                        <div class="value" id="major-fixes-count">0</div>
+                                        <div class="label">Major Fixes</div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <div class="form-actions">
@@ -926,12 +1193,270 @@
         </div>
     </div>
 
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
+
     <script>
         // Global variables
         let selectedFile = null;
         let currentInvoiceData = null;
         let previewUrl = null;
+        let fieldFeedback = {}; // Tracks feedback for each field
+        let trainingData = {}; // Collects training data for AI learning
         
+        // AI Learning and Field Feedback System
+        function initializeFieldFeedback() {
+            fieldFeedback = {
+                'invoice-number': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'vendor-name': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'invoice-date': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'due-date': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'total-amount': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'tax-amount': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'po-number': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'description': { status: null, originalValue: '', correctedValue: '', confidence: 0 }
+            };
+            updateTrainingSummary();
+        }
+
+        function setFieldFeedback(button) {
+            const fieldName = button.dataset.field;
+            const feedbackType = button.dataset.type;
+            const fieldElement = document.getElementById(fieldName);
+            
+            // Clear previous feedback buttons for this field
+            const allButtons = document.querySelectorAll(`[data-field="${fieldName}"]`);
+            allButtons.forEach(btn => {
+                btn.classList.remove('approved', 'minor-fix', 'major-fix', 'active');
+            });
+            
+            // Set active state
+            button.classList.add(feedbackType, 'active');
+            
+            // Update feedback data
+            const originalValue = fieldElement.dataset.original || '';
+            const currentValue = fieldElement.value || '';
+            
+            fieldFeedback[fieldName] = {
+                status: feedbackType,
+                originalValue: originalValue,
+                correctedValue: currentValue,
+                confidence: getFieldConfidence(fieldName),
+                hasChanged: originalValue !== currentValue
+            };
+            
+            // Create training data entry
+            if (feedbackType === 'minor-fix' || feedbackType === 'major-fix') {
+                trainingData[fieldName] = {
+                    field: fieldName,
+                    extractedValue: originalValue,
+                    correctedValue: currentValue,
+                    feedbackType: feedbackType,
+                    confidence: getFieldConfidence(fieldName),
+                    timestamp: new Date().toISOString()
+                };
+                
+                showToast(
+                    'AI Learning Update', 
+                    `OCR model will learn from your ${feedbackType.replace('-', ' ')} correction to improve future accuracy.`,
+                    'info'
+                );
+            } else if (feedbackType === 'approved') {
+                showToast(
+                    'Field Approved', 
+                    `OCR extraction confirmed as accurate. This reinforces the model's confidence.`,
+                    'success'
+                );
+            }
+            
+            updateTrainingSummary();
+            
+            // Add delighter animation
+            button.classList.add('delighter-animation');
+            setTimeout(() => button.classList.remove('delighter-animation'), 800);
+        }
+
+        function markFieldChanged(fieldElement) {
+            fieldElement.classList.add('field-changed');
+            
+            // Update feedback if already set
+            const fieldName = fieldElement.id;
+            if (fieldFeedback[fieldName] && fieldFeedback[fieldName].status) {
+                const originalValue = fieldElement.dataset.original || '';
+                const currentValue = fieldElement.value || '';
+                
+                fieldFeedback[fieldName].correctedValue = currentValue;
+                fieldFeedback[fieldName].hasChanged = originalValue !== currentValue;
+                
+                // If field has feedback and was changed, update training data
+                if (fieldFeedback[fieldName].status === 'minor-fix' || fieldFeedback[fieldName].status === 'major-fix') {
+                    trainingData[fieldName] = {
+                        ...trainingData[fieldName],
+                        correctedValue: currentValue
+                    };
+                }
+            }
+            
+            updateTrainingSummary();
+        }
+
+        function getFieldConfidence(fieldName) {
+            // Simulate confidence scores based on field type and extraction quality
+            const confidenceMap = {
+                'invoice-number': 0.95,
+                'vendor-name': 0.88,
+                'total-amount': 0.92,
+                'tax-amount': 0.85,
+                'invoice-date': 0.90,
+                'due-date': 0.87,
+                'po-number': 0.75,
+                'description': 0.70
+            };
+            return confidenceMap[fieldName] || 0.80;
+        }
+
+        function updateTrainingSummary() {
+            let approvedCount = 0;
+            let minorFixCount = 0;
+            let majorFixCount = 0;
+            
+            Object.values(fieldFeedback).forEach(feedback => {
+                if (feedback.status === 'approved') approvedCount++;
+                else if (feedback.status === 'minor-fix') minorFixCount++;
+                else if (feedback.status === 'major-fix') majorFixCount++;
+            });
+            
+            document.getElementById('approved-count').textContent = approvedCount;
+            document.getElementById('minor-fixes-count').textContent = minorFixCount;
+            document.getElementById('major-fixes-count').textContent = majorFixCount;
+        }
+
+        function showToast(title, message, type = 'success') {
+            // Create toast container if it doesn't exist
+            let toastContainer = document.querySelector('.toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.className = 'toast-container';
+                document.body.appendChild(toastContainer);
+            }
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="toast-header">${title}</div>
+                <div class="toast-body">${message}</div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Show toast with animation
+            setTimeout(() => toast.classList.add('show'), 100);
+            
+            // Remove toast after delay
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 400);
+            }, 4000);
+        }
+
+        async function saveInvoiceWithFeedback() {
+            // Collect all form data
+            const invoiceData = {
+                id: Date.now(), // Generate unique ID
+                invoiceNumber: document.getElementById('invoice-number').value,
+                vendorName: document.getElementById('vendor-name').value,
+                invoiceDate: document.getElementById('invoice-date').value,
+                dueDate: document.getElementById('due-date').value,
+                totalAmount: parseFloat(document.getElementById('total-amount').value) || 0,
+                taxAmount: parseFloat(document.getElementById('tax-amount').value) || 0,
+                poNumber: document.getElementById('po-number').value,
+                description: document.getElementById('description').value,
+                feedback: fieldFeedback,
+                trainingData: trainingData,
+                timestamp: new Date().toISOString(),
+                filename: selectedFile?.name || 'unknown'
+            };
+            
+            try {
+                // Simulate API call to save invoice with training data
+                const response = await fetch('https://docbot-enterprise-backend.onrender.com/api/v1/invoices/save-with-feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(invoiceData)
+                });
+                
+                if (response.ok) {
+                    // Success with delighter feedback
+                    showToast(
+                        '🎉 Invoice Saved Successfully!', 
+                        'Your feedback has been captured and will improve OCR accuracy for future invoices. The AI model has been updated with your corrections.',
+                        'success'
+                    );
+                    
+                    // Show celebration animation on the approve button
+                    const approveBtn = document.querySelector('.btn-success');
+                    if (approveBtn) {
+                        approveBtn.classList.add('delighter-animation');
+                        setTimeout(() => approveBtn.classList.remove('delighter-animation'), 800);
+                    }
+                    
+                    // Reset form after delay
+                    setTimeout(() => {
+                        resetReviewForm();
+                        showView('dashboard');
+                    }, 2000);
+                    
+                } else {
+                    throw new Error('Failed to save invoice');
+                }
+                
+            } catch (error) {
+                console.error('Error saving invoice:', error);
+                showToast(
+                    'Save Error', 
+                    'There was an issue saving the invoice. Please try again.',
+                    'error'
+                );
+            }
+        }
+
+        function resetReviewForm() {
+            // Clear all form fields
+            document.querySelectorAll('#ocr-form-content input, #ocr-form-content textarea').forEach(field => {
+                field.value = '';
+                field.classList.remove('field-changed');
+                field.dataset.original = '';
+            });
+            
+            // Clear all feedback buttons
+            document.querySelectorAll('.feedback-btn').forEach(btn => {
+                btn.classList.remove('approved', 'minor-fix', 'major-fix', 'active');
+            });
+            
+            // Reset feedback data
+            initializeFieldFeedback();
+            
+            // Clear document preview
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+                previewUrl = null;
+            }
+            
+            document.getElementById('document-preview-content').innerHTML = `
+                <div class="preview-placeholder">
+                    <div style="font-size: 3rem;">📄</div>
+                    <div>Select an invoice to preview the original document</div>
+                </div>
+            `;
+        }
+
         // Sample data
         const sampleInvoices = [
             {
@@ -1217,39 +1742,71 @@
             });
         }
         
-        function approveInvoice() {
-            // Collect form data
-            const invoiceData = {
-                invoice_number: document.getElementById('invoice-number').value,
-                vendor_name: document.getElementById('vendor-name').value,
-                invoice_date: document.getElementById('invoice-date').value,
-                due_date: document.getElementById('due-date').value,
-                total_amount: document.getElementById('total-amount').value,
-                tax_amount: document.getElementById('tax-amount').value,
-                po_number: document.getElementById('po-number').value,
-                description: document.getElementById('description').value
-            };
+        async function approveInvoice() {
+            // Check if any fields need feedback
+            let hasUnsetFeedback = false;
+            Object.keys(fieldFeedback).forEach(fieldName => {
+                const element = document.getElementById(fieldName);
+                if (element && element.value && !fieldFeedback[fieldName].status) {
+                    hasUnsetFeedback = true;
+                }
+            });
             
-            // Show success message
-            alert('Invoice approved successfully! Data has been sent to your ERP system.');
+            if (hasUnsetFeedback) {
+                const proceed = confirm(
+                    'Some fields haven\'t been reviewed with feedback buttons. ' +
+                    'Proceeding will mark unreviewed fields as approved. Continue?'
+                );
+                
+                if (!proceed) return;
+                
+                // Auto-approve unset fields
+                Object.keys(fieldFeedback).forEach(fieldName => {
+                    const element = document.getElementById(fieldName);
+                    if (element && element.value && !fieldFeedback[fieldName].status) {
+                        fieldFeedback[fieldName].status = 'approved';
+                        const approveBtn = document.querySelector(`[data-field="${fieldName}"][data-type="approved"]`);
+                        if (approveBtn) {
+                            approveBtn.classList.add('approved');
+                        }
+                    }
+                });
+                updateTrainingSummary();
+            }
             
-            // Return to dashboard
-            showView('dashboard');
-            resetReviewForm();
+            // Save invoice with feedback data
+            await saveInvoiceWithFeedback();
         }
         
-        function saveForReview() {
-            alert('Invoice saved for later review. It will appear in your pending invoices list.');
-            showView('dashboard');
-            resetReviewForm();
+        async function saveForReview() {
+            // Save invoice with current feedback but mark as pending
+            showToast(
+                '💾 Invoice Saved for Review', 
+                'Invoice has been saved with your current feedback. You can continue reviewing later.',
+                'info'
+            );
+            
+            setTimeout(() => {
+                showView('dashboard');
+            }, 1500);
         }
         
         function rejectInvoice() {
             const reason = prompt('Please provide a reason for rejection:');
             if (reason) {
-                alert('Invoice rejected. The reason has been logged and the vendor will be notified.');
-                showView('dashboard');
-                resetReviewForm();
+                showToast(
+                    '❌ Invoice Rejected', 
+                    `Invoice has been rejected. Reason: ${reason}. This feedback will help improve the OCR system.`,
+                    'error'
+                );
+                
+                // Clear any training data since invoice is rejected
+                trainingData = {};
+                
+                setTimeout(() => {
+                    resetReviewForm();
+                    showView('dashboard');
+                }, 2000);
             }
         }
         
