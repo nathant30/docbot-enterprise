@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocBot Enterprise - Invoice Automation</title>
+    <title>DocBot Enterprise - AI-Powered Invoice Automation</title>
     <style>
         * {
             margin: 0;
@@ -11,399 +11,2522 @@
             box-sizing: border-box;
         }
         
+        :root {
+            /* Modern Color Palette */
+            --primary: #0066cc;
+            --primary-light: #4d9eff;
+            --primary-dark: #004d99;
+            --secondary: #00d4aa;
+            --secondary-light: #33e0bb;
+            --secondary-dark: #00a385;
+            --accent: #ff6b35;
+            --accent-light: #ff8a5c;
+            --accent-dark: #e55428;
+            
+            /* Neutrals */
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            
+            /* Semantic Colors */
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --warning-light: #fbbf24;
+            --error: #ef4444;
+            --error-light: #f87171;
+            --info: #3b82f6;
+            --info-light: #60a5fa;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            
+            /* Transitions */
+            --transition-fast: 0.15s ease-in-out;
+            --transition-base: 0.25s ease-in-out;
+            --transition-slow: 0.35s ease-in-out;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            color: #1f2937;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--gray-100) 100%);
             min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
+            color: var(--gray-800);
+            line-height: 1.6;
         }
         
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="rgba(255,255,255,0.03)"/><circle cx="20" cy="20" r="0.3" fill="rgba(255,255,255,0.02)"/><circle cx="80" cy="80" r="0.4" fill="rgba(255,255,255,0.025)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .container {
-            max-width: 1200px;
+        /* Modern App Container */
+        .app-container {
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 20px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: var(--shadow-xl);
             position: relative;
-            z-index: 2;
         }
         
+        /* Header */
         .header {
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.1),
-                0 2px 8px rgba(0, 0, 0, 0.05),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
-        .header h1 {
-            color: #2563eb;
-            font-size: 2rem;
+        .logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+        
+        .app-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
-        .demo-mode {
-            background: linear-gradient(135deg, #059669, #10b981);
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .demo-badge {
+            background: linear-gradient(135deg, var(--success), var(--success-light));
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Hamburger Menu */
+        .hamburger-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition-base);
+        }
+        
+        .hamburger-btn:hover {
+            background: var(--gray-100);
+        }
+        
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .hamburger-line {
+            width: 1.5rem;
+            height: 0.125rem;
+            background: var(--gray-700);
+            transition: var(--transition-base);
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: var(--shadow-xl);
+            z-index: 200;
+            transition: var(--transition-slow);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar.open {
+            right: 0;
+        }
+        
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 150;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-slow);
+        }
+        
+        .sidebar-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+        
+        .sidebar-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: var(--radius-md);
+            transition: var(--transition-base);
+        }
+        
+        .sidebar-close:hover {
+            background: var(--gray-100);
+        }
+        
+        .sidebar-nav {
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-section-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+        
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--gray-700);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: var(--transition-base);
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-link:hover {
+            background: var(--gray-100);
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Primary Navigation */
+        .primary-nav {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+            background: var(--gray-100);
+            padding: 0.5rem;
+            border-radius: var(--radius-lg);
+        }
+        
+        .nav-btn {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+            font-weight: 500;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-align: center;
+        }
+        
+        .nav-btn:hover:not(.active) {
+            background: var(--gray-200);
+            color: var(--gray-800);
+        }
+        
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        
+        /* Dashboard Cards */
+        .dashboard-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
         
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
         
-        .stat-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 28px;
-            border-radius: 16px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.08),
-                0 2px 8px rgba(0, 0, 0, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            text-align: center;
+        /* Data Visualization Section */
+        .analytics-section {
+            margin-bottom: 3rem;
+        }
+        
+        .analytics-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+        
+        .analytics-subtitle {
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            font-size: 1.125rem;
+        }
+        
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .stat-card::before {
+        .chart-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
         }
         
-        .stat-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.15),
-                0 8px 24px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
         }
         
-        .stat-card h3 {
-            font-size: 0.95rem;
-            color: #6b7280;
-            margin-bottom: 12px;
-            font-weight: 500;
-            letter-spacing: 0.025em;
+        .chart-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--gray-800);
         }
         
-        .stat-card .value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 6px;
-            background: linear-gradient(135deg, currentColor, currentColor 60%, rgba(255, 255, 255, 0.8));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .stat-card.invoices .value { 
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .stat-card.pending .value { 
-            background: linear-gradient(135deg, #dc2626, #ef4444);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .stat-card.approved .value { 
-            background: linear-gradient(135deg, #059669, #10b981);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .stat-card.amount .value { 
-            background: linear-gradient(135deg, #059669, #10b981);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .nav-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-        
-        .nav-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.08),
-                0 2px 8px rgba(0, 0, 0, 0.04),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .nav-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-        }
-        
-        .nav-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.15),
-                0 8px 24px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-        }
-        
-        .nav-card:active {
-            transform: translateY(-6px) scale(1.01);
-        }
-        
-        .nav-card h3 {
-            color: #2563eb;
-            margin-bottom: 12px;
-            font-size: 1.3rem;
+        .chart-period {
+            background: var(--gray-100);
+            color: var(--gray-600);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
             font-weight: 600;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
         
-        .nav-card p {
-            color: #6b7280;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-weight: 400;
+        .chart-container {
+            height: 200px;
+            position: relative;
+            background: linear-gradient(45deg, var(--gray-50) 0%, white 100%);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
         }
-
-        /* All view containers */
-        .view-container {
-            display: none;
+        
+        .processing-chart {
+            height: 100%;
+            display: flex;
+            align-items: end;
+            gap: 0.5rem;
+            padding: 1rem;
         }
-
-        .view-container.active {
+        
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: barGrow 1.5s ease-out;
+        }
+        
+        .chart-bar:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .chart-bar:nth-child(2n) {
+            background: linear-gradient(to top, var(--secondary), var(--secondary-light));
+        }
+        
+        .chart-bar:nth-child(3n) {
+            background: linear-gradient(to top, var(--accent), var(--accent-light));
+        }
+        
+        @keyframes barGrow {
+            from { height: 0; }
+            to { height: var(--bar-height, 50%); }
+        }
+        
+        .accuracy-ring {
+            width: 160px;
+            height: 160px;
+            margin: 1rem auto;
+            position: relative;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--success) 0deg 352deg,
+                var(--gray-200) 352deg 360deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: ringSpin 2s ease-in-out;
+        }
+        
+        @keyframes ringSpin {
+            from { transform: rotate(-90deg); }
+            to { transform: rotate(270deg); }
+        }
+        
+        .accuracy-inner {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .accuracy-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--success);
+            line-height: 1;
+        }
+        
+        .accuracy-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .ai-insights {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-xl);
+            margin-top: 1rem;
+        }
+        
+        .insights-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .insights-list {
+            list-style: none;
+            font-size: 0.875rem;
+            opacity: 0.95;
+        }
+        
+        .insights-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .insights-list li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .actions-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        
+        .card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--card-accent, var(--primary));
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .card.clickable {
+            cursor: pointer;
+        }
+        
+        .card.clickable:hover {
+            transform: translateY(-6px);
+        }
+        
+        /* Stat Card */
+        .stat-card {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--card-accent, var(--primary));
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-change {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--success);
+        }
+        
+        /* Action Card */
+        .action-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+        }
+        
+        .action-card p {
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+        
+        /* Card Accent Colors */
+        .card.primary { --card-accent: var(--primary); }
+        .card.secondary { --card-accent: var(--secondary); }
+        .card.success { --card-accent: var(--success); }
+        .card.warning { --card-accent: var(--warning); }
+        .card.error { --card-accent: var(--error); }
+        .card.accent { --card-accent: var(--accent); }
+        
+        /* Upload Section */
+        .upload-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .upload-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .upload-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-subtitle {
+            color: var(--gray-600);
+            font-size: 1.125rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-xl);
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: var(--transition-base);
+            background: var(--gray-50);
+        }
+        
+        .upload-area:hover,
+        .upload-area.dragover {
+            border-color: var(--primary);
+            background: rgba(0, 102, 204, 0.05);
+            transform: scale(1.02);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray-400);
+        }
+        
+        .upload-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+        }
+        
+        .upload-hint {
+            color: var(--gray-500);
+        }
+        
+        .upload-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-base);
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), var(--success-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-success:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-outline {
+            background: white;
+            border: 2px solid var(--gray-300);
+            color: var(--gray-700);
+        }
+        
+        .btn-outline:hover {
+            background: var(--gray-50);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn:disabled {
+            background: var(--gray-300);
+            color: var(--gray-500);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--gray-100);
+            border: none;
+            border-radius: var(--radius-lg);
+            color: var(--gray-700);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition-base);
+            margin-bottom: 1.5rem;
+        }
+        
+        .back-btn:hover {
+            background: var(--gray-200);
+            transform: translateX(-2px);
+        }
+        
+        /* Review Interface */
+        .review-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            height: calc(100vh - 300px);
+            min-height: 600px;
+        }
+        
+        .review-panel {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+        
+        .panel-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        
+        .panel-content {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .preview-content {
+            flex: 1;
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            overflow: hidden;
+        }
+        
+        .preview-placeholder {
+            text-align: center;
+            color: var(--gray-500);
+            padding: 2rem;
+        }
+        
+        .preview-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
             display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+            font-weight: 600;
+            font-size: 0.875rem;
         }
-
-        /* Loading state */
+        
+        .field-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+        }
+        
+        .form-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            transition: var(--transition-base);
+            background: white;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+        
+        .form-input.changed {
+            border-color: var(--warning);
+            background: rgba(245, 158, 11, 0.05);
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* Feedback Buttons */
+        .field-feedback {
+            display: flex;
+            gap: 0.375rem;
+            align-items: flex-start;
+            margin-top: 0.25rem;
+        }
+        
+        .feedback-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: var(--transition-fast);
+            background: var(--gray-200);
+            color: var(--gray-600);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .feedback-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feedback-btn.approved {
+            background: linear-gradient(135deg, var(--success), var(--success-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feedback-btn.minor-fix {
+            background: linear-gradient(135deg, var(--warning), var(--warning-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feedback-btn.major-fix {
+            background: linear-gradient(135deg, var(--error), var(--error-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feedback-btn.active {
+            animation: feedback-pulse 0.6s cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        
+        @keyframes feedback-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Training Summary */
+        .training-summary {
+            background: linear-gradient(135deg, var(--info-light), var(--primary-light));
+            background-size: 200% 200%;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            color: white;
+            animation: gradient-shift 8s ease infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .training-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .training-description {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .training-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .training-stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .training-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .training-stat-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Invoice List */
+        .invoice-tabs {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+            background: var(--gray-100);
+            padding: 0.25rem;
+            border-radius: var(--radius-lg);
+        }
+        
+        .invoice-tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-base);
+            font-weight: 500;
+            color: var(--gray-600);
+            background: transparent;
+            border: none;
+        }
+        
+        .invoice-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .invoice-list {
+            background: white;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .invoice-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-base);
+            cursor: pointer;
+        }
+        
+        .invoice-item:hover {
+            background: var(--gray-50);
+        }
+        
+        .invoice-item:last-child {
+            border-bottom: none;
+        }
+        
+        .invoice-info h4 {
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+        
+        .invoice-info p {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+        }
+        
+        .invoice-status {
+            padding: 0.375rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-pending {
+            background: var(--warning);
+            color: white;
+        }
+        
+        .status-approved {
+            background: var(--success);
+            color: white;
+        }
+        
+        .status-processing {
+            background: var(--info);
+            color: white;
+        }
+        
+        /* Vendor Grid */
+        .vendor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .vendor-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition-base);
+        }
+        
+        .vendor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .vendor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .vendor-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        
+        .vendor-rating {
+            background: linear-gradient(135deg, var(--warning), var(--warning-light));
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .vendor-email {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .vendor-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .vendor-stat {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+        }
+        
+        .vendor-stat-value {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .vendor-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.25rem;
+        }
+        
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .toast {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1rem 1.25rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-200);
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toast::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--toast-accent, var(--success));
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .toast.success { --toast-accent: var(--success); }
+        .toast.error { --toast-accent: var(--error); }
+        .toast.warning { --toast-accent: var(--warning); }
+        .toast.info { --toast-accent: var(--info); }
+        
+        .toast-header {
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.25rem;
+        }
+        
+        .toast-body {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+        
         .loading {
             text-align: center;
-            color: #6b7280;
-            padding: 60px 20px;
-            font-size: 1.1rem;
+            color: var(--gray-500);
+            padding: 2rem;
         }
-
-        .loading::before {
-            content: '⏳';
-            display: block;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            animation: spin 2s linear infinite;
+        
+        .error-message {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            color: var(--error);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid #fca5a5;
+            margin: 1rem 0;
         }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        
+        .success-message {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            color: var(--success);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid #86efac;
+            margin: 1rem 0;
         }
-
-        /* Error states */
-        .error {
-            background: rgba(254, 242, 242, 0.95);
-            backdrop-filter: blur(20px);
-            color: #dc2626;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(220, 38, 38, 0.2);
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+        
+        .delighter {
+            animation: delighter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-
-        /* Success states */
-        .success {
-            background: rgba(240, 253, 244, 0.95);
-            backdrop-filter: blur(20px);
-            color: #059669;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(5, 150, 105, 0.2);
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.1);
+        
+        @keyframes delighter {
+            0% {
+                transform: scale(0.3) rotate(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
         }
-
-        /* Mobile responsive */
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 16px;
+            .hamburger-btn {
+                display: flex;
+            }
+            
+            .primary-nav {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                text-align: left;
+            }
+            
+            .review-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                height: auto;
+            }
+            
+            .main-content {
+                padding: 1rem;
             }
             
             .header {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
+                padding: 1rem;
             }
             
-            .header h1 {
-                font-size: 1.6rem;
+            .analytics-grid {
+                grid-template-columns: 1fr;
             }
             
             .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
             
-            .nav-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
+            .actions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             }
             
-            .stat-card, .nav-card {
-                padding: 20px;
+            .vendor-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .training-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .analytics-title {
+                font-size: 1.5rem;
+            }
+            
+            .chart-container {
+                height: 150px;
+            }
+            
+            .accuracy-ring {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .accuracy-inner {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .accuracy-value {
+                font-size: 1.25rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .toast-container {
+                left: 1rem;
+                right: 1rem;
+            }
+            
+            .toast {
+                transform: translateY(-100px);
+                max-width: none;
+            }
+            
+            .toast.show {
+                transform: translateY(0);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📊 DocBot Enterprise Dashboard</h1>
-            <div class="demo-mode">✅ Demo Mode</div>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3 class="sidebar-title">Menu</h3>
+            <button class="sidebar-close" onclick="closeSidebar()">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
         </div>
         
-        <div class="stats-grid">
-            <div class="stat-card invoices">
-                <h3>Total Invoices</h3>
-                <div class="value">47</div>
+        <div class="sidebar-nav">
+            <div class="sidebar-section">
+                <h4 class="sidebar-section-title">Tools</h4>
+                <a href="#" class="sidebar-link" onclick="showApiDocs()">
+                    <span>📚</span>
+                    <span>API Documentation</span>
+                </a>
+                <a href="#" class="sidebar-link" onclick="showSystemHealth()">
+                    <span>🔧</span>
+                    <span>System Health</span>
+                </a>
+                <a href="#" class="sidebar-link" onclick="showSettings()">
+                    <span>⚙️</span>
+                    <span>Settings</span>
+                </a>
             </div>
-            <div class="stat-card pending">
-                <h3>Pending Review</h3>
-                <div class="value">8</div>
-            </div>
-            <div class="stat-card approved">
-                <h3>Approved Invoices</h3>
-                <div class="value">39</div>
-            </div>
-            <div class="stat-card amount">
-                <h3>Total Amount</h3>
-                <div class="value">$23,456.78</div>
+            
+            <div class="sidebar-section">
+                <h4 class="sidebar-section-title">Support</h4>
+                <a href="#" class="sidebar-link" onclick="showHelp()">
+                    <span>❓</span>
+                    <span>Help Center</span>
+                </a>
+                <a href="#" class="sidebar-link" onclick="showAbout()">
+                    <span>ℹ️</span>
+                    <span>About DocBot</span>
+                </a>
             </div>
         </div>
+    </nav>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">DB</div>
+                    <h1 class="app-title">DocBot Enterprise</h1>
+                </div>
+                
+                <div class="header-actions">
+                    <div class="demo-badge">Demo Mode</div>
+                    <button class="hamburger-btn" onclick="openSidebar()">
+                        <div class="hamburger-icon">
+                            <div class="hamburger-line"></div>
+                            <div class="hamburger-line"></div>
+                            <div class="hamburger-line"></div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </header>
         
-        <div class="nav-grid">
-            <a href="app.html" class="nav-card">
-                <h3>📄 Full Application</h3>
-                <p>Access the complete DocBot Enterprise application with all features</p>
-            </a>
-            <a href="https://docbot-enterprise-backend.onrender.com/docs" target="_blank" class="nav-card">
-                <h3>📖 API Documentation</h3>
-                <p>View complete API documentation and endpoints</p>
-            </a>
-            <a href="https://docbot-enterprise-backend.onrender.com/health" target="_blank" class="nav-card">
-                <h3>🔧 System Health</h3>
-                <p>Check backend API status and health metrics</p>
-            </a>
-            <div class="nav-card" onclick="showInfo()">
-                <h3>ℹ️ About DocBot</h3>
-                <p>Learn more about our AI-powered invoice automation platform</p>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Primary Navigation -->
+            <nav class="primary-nav">
+                <button class="nav-btn active" onclick="showView('dashboard', this)">Dashboard</button>
+                <button class="nav-btn" onclick="showView('upload', this)">Upload</button>
+                <button class="nav-btn" onclick="showView('invoices', this)">Review</button>
+                <button class="nav-btn" onclick="showView('vendors', this)">Vendors</button>
+            </nav>
+            
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="view">
+                <!-- Analytics Section -->
+                <div class="analytics-section">
+                    <h2 class="analytics-title">AI-Powered Invoice Processing</h2>
+                    <p class="analytics-subtitle">Real-time insights and performance metrics from your intelligent document processing system</p>
+                    
+                    <div class="analytics-grid">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3 class="chart-title">📈 Processing Volume</h3>
+                                <span class="chart-period">Last 7 Days</span>
+                            </div>
+                            <div class="chart-container">
+                                <div class="processing-chart">
+                                    <div class="chart-bar" style="--bar-height: 65%;"></div>
+                                    <div class="chart-bar" style="--bar-height: 80%;"></div>
+                                    <div class="chart-bar" style="--bar-height: 45%;"></div>
+                                    <div class="chart-bar" style="--bar-height: 90%;"></div>
+                                    <div class="chart-bar" style="--bar-height: 75%;"></div>
+                                    <div class="chart-bar" style="--bar-height: 95%;"></div>
+                                    <div class="chart-bar" style="--bar-height: 85%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3 class="chart-title">🎯 OCR Accuracy</h3>
+                                <span class="chart-period">This Month</span>
+                            </div>
+                            <div class="accuracy-ring">
+                                <div class="accuracy-inner">
+                                    <div class="accuracy-value">97.8%</div>
+                                    <div class="accuracy-label">Accuracy</div>
+                                </div>
+                            </div>
+                            <div class="ai-insights">
+                                <div class="insights-title">
+                                    <span>🤖</span>
+                                    <span>AI Insights</span>
+                                </div>
+                                <ul class="insights-list">
+                                    <li>Accuracy improved 12% this month</li>
+                                    <li>Best performance on invoice numbers</li>
+                                    <li>Learning from 847 user corrections</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-grid stats-grid">
+                    <div class="card stat-card primary">
+                        <div class="stat-value">2,847</div>
+                        <div class="stat-label">Total Invoices</div>
+                        <div class="stat-change">+12% this month</div>
+                    </div>
+                    
+                    <div class="card stat-card warning">
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">Pending Review</div>
+                        <div class="stat-change">Needs attention</div>
+                    </div>
+                    
+                    <div class="card stat-card success">
+                        <div class="stat-value">156</div>
+                        <div class="stat-label">Approved Today</div>
+                        <div class="stat-change">+8% vs yesterday</div>
+                    </div>
+                    
+                    <div class="card stat-card secondary">
+                        <div class="stat-value">$2.4M</div>
+                        <div class="stat-label">Total Processed</div>
+                        <div class="stat-change">This quarter</div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid actions-grid">
+                    <div class="card action-card clickable primary" onclick="showView('upload', document.querySelector('[onclick*=upload]'))">
+                        <h3>Upload New Invoice</h3>
+                        <p>Process invoices with advanced AI-powered OCR extraction and automatic data validation</p>
+                    </div>
+                    
+                    <div class="card action-card clickable warning" onclick="reviewPendingInvoices()">
+                        <h3>Review Pending Items</h3>
+                        <p>Review and approve 23 invoices awaiting validation with side-by-side document comparison</p>
+                    </div>
+                    
+                    <div class="card action-card clickable secondary" onclick="showView('vendors', document.querySelector('[onclick*=vendors]'))">
+                        <h3>Vendor Management</h3>
+                        <p>Manage vendor profiles, payment terms, and track processing performance metrics</p>
+                    </div>
+                    
+                    <div class="card action-card clickable accent" onclick="showReports()">
+                        <h3>Analytics & Reports</h3>
+                        <p>Generate detailed reports on processing efficiency, accuracy rates, and cost savings</p>
+                    </div>
+                </div>
             </div>
-        </div>
+            
+            <!-- Upload View -->
+            <div id="upload-view" class="view hidden">
+                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to Dashboard
+                </button>
+                
+                <div class="upload-section">
+                    <div class="upload-header">
+                        <h2 class="upload-title">Upload Invoice</h2>
+                        <p class="upload-subtitle">Upload PDF, PNG, or JPG files for AI-powered OCR processing</p>
+                    </div>
+                    
+                    <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                        <div class="upload-icon">📄</div>
+                        <div class="upload-text">Click to select files or drag and drop</div>
+                        <div class="upload-hint">Supports PDF, PNG, JPG (up to 50MB)</div>
+                        <input type="file" id="fileInput" style="display: none;" accept=".pdf,.png,.jpg,.jpeg" onchange="handleFileSelect(this)">
+                    </div>
+                    
+                    <div class="upload-actions">
+                        <button class="btn btn-primary" id="processNowBtn" onclick="processNow()" disabled>
+                            Process Now
+                        </button>
+                        <button class="btn btn-secondary" id="processLaterBtn" onclick="processLater()" disabled>
+                            Process Later
+                        </button>
+                    </div>
+                    
+                    <div id="uploadStatus"></div>
+                </div>
+            </div>
+            
+            <!-- Review View -->
+            <div id="review-view" class="view hidden">
+                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to Dashboard
+                </button>
+                
+                <div class="review-container">
+                    <!-- Document Preview Panel -->
+                    <div class="review-panel">
+                        <div class="panel-header">
+                            <h3 class="panel-title">Original Document</h3>
+                        </div>
+                        <div class="panel-content">
+                            <div class="preview-content" id="documentPreview">
+                                <div class="preview-placeholder">
+                                    <div class="preview-icon">📄</div>
+                                    <div>Select an invoice to preview the original document</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- OCR Form Panel -->
+                    <div class="review-panel">
+                        <div class="panel-header">
+                            <h3 class="panel-title">Extracted Data - Review & Edit</h3>
+                        </div>
+                        <div class="panel-content">
+                            <form id="reviewForm">
+                                <div class="form-group">
+                                    <label class="form-label">Invoice Number</label>
+                                    <div class="field-container">
+                                        <input type="text" class="form-input" id="invoiceNumber" placeholder="Auto-extracted invoice number" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="invoiceNumber" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="invoiceNumber" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="invoiceNumber" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Vendor Name</label>
+                                    <div class="field-container">
+                                        <input type="text" class="form-input" id="vendorName" placeholder="Auto-extracted vendor name" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="vendorName" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="vendorName" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="vendorName" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Invoice Date</label>
+                                    <div class="field-container">
+                                        <input type="date" class="form-input" id="invoiceDate" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="invoiceDate" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="invoiceDate" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="invoiceDate" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Due Date</label>
+                                    <div class="field-container">
+                                        <input type="date" class="form-input" id="dueDate" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="dueDate" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="dueDate" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="dueDate" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Total Amount</label>
+                                    <div class="field-container">
+                                        <input type="number" class="form-input" id="totalAmount" step="0.01" placeholder="0.00" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="totalAmount" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="totalAmount" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="totalAmount" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Tax Amount</label>
+                                    <div class="field-container">
+                                        <input type="number" class="form-input" id="taxAmount" step="0.01" placeholder="0.00" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="taxAmount" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="taxAmount" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="taxAmount" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Purchase Order Number</label>
+                                    <div class="field-container">
+                                        <input type="text" class="form-input" id="poNumber" placeholder="Optional PO number" data-original="" oninput="markFieldChanged(this)">
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="poNumber" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="poNumber" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="poNumber" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Description / Notes</label>
+                                    <div class="field-container">
+                                        <textarea class="form-input form-textarea" id="description" placeholder="Invoice description or additional notes" data-original="" oninput="markFieldChanged(this)"></textarea>
+                                        <div class="field-feedback">
+                                            <button type="button" class="feedback-btn" data-field="description" data-type="approved" onclick="setFieldFeedback(this)" title="Approved - Correct as extracted">✓</button>
+                                            <button type="button" class="feedback-btn" data-field="description" data-type="minor-fix" onclick="setFieldFeedback(this)" title="Minor Fix - Small correction needed">⋯</button>
+                                            <button type="button" class="feedback-btn" data-field="description" data-type="major-fix" onclick="setFieldFeedback(this)" title="Major Fix - Significant correction needed">✕</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="training-summary" id="trainingSummary">
+                                    <div class="training-title">
+                                        <span>🤖</span>
+                                        <span>AI Learning Summary</span>
+                                    </div>
+                                    <div class="training-description">Your feedback helps improve OCR accuracy for future invoices</div>
+                                    <div class="training-stats">
+                                        <div class="training-stat">
+                                            <div class="training-stat-value" id="approvedCount">0</div>
+                                            <div class="training-stat-label">Approved</div>
+                                        </div>
+                                        <div class="training-stat">
+                                            <div class="training-stat-value" id="minorFixesCount">0</div>
+                                            <div class="training-stat-label">Minor Fixes</div>
+                                        </div>
+                                        <div class="training-stat">
+                                            <div class="training-stat-value" id="majorFixesCount">0</div>
+                                            <div class="training-stat-label">Major Fixes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-actions" style="display: flex; gap: 1rem; margin-top: 2rem;">
+                                    <button type="button" class="btn btn-success" onclick="approveInvoice()">
+                                        Approve Invoice
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="saveForReview()">
+                                        Save for Later
+                                    </button>
+                                    <button type="button" class="btn btn-outline" onclick="rejectInvoice()">
+                                        Reject
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Invoices View -->
+            <div id="invoices-view" class="view hidden">
+                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to Dashboard
+                </button>
+                
+                <h2 style="color: var(--gray-800); margin-bottom: 2rem; font-size: 1.75rem; font-weight: 700;">Invoice Management</h2>
+                
+                <div class="invoice-tabs">
+                    <button class="invoice-tab active" onclick="switchInvoiceTab('all', this)">All Invoices</button>
+                    <button class="invoice-tab" onclick="switchInvoiceTab('pending', this)">Pending Review</button>
+                    <button class="invoice-tab" onclick="switchInvoiceTab('approved', this)">Approved</button>
+                </div>
+                
+                <div class="invoice-list" id="invoiceList">
+                    <!-- Invoice items will be populated here -->
+                </div>
+            </div>
+            
+            <!-- Vendors View -->
+            <div id="vendors-view" class="view hidden">
+                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to Dashboard
+                </button>
+                
+                <h2 style="color: var(--gray-800); margin-bottom: 2rem; font-size: 1.75rem; font-weight: 700;">Vendor Management</h2>
+                
+                <div class="vendor-grid" id="vendorGrid">
+                    <!-- Vendor cards will be populated here -->
+                </div>
+            </div>
+        </main>
     </div>
 
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <script>
-        function showInfo() {
-            alert(`
-🚀 DocBot Enterprise - Invoice Automation Platform
-
-✨ Key Features:
-• AI-powered OCR processing
-• Automated vendor detection 
-• Smart approval workflows
-• ERP system integration
-• Real-time analytics
-
-💡 Technology:
-• FastAPI Python backend
-• Vanilla JavaScript frontend
-• Machine learning OCR
-• PostgreSQL database
-• RESTful API design
-
-📊 Value Proposition:
-• Reduces processing time by 90%
-• 97.8% accuracy rate
-• $12,000+ value per client
-• Enterprise-grade security
-• Scalable architecture
-
-Click "Full Application" to access all features!
-            `);
+        // Global variables
+        let selectedFile = null;
+        let currentInvoiceData = null;
+        let previewUrl = null;
+        let fieldFeedback = {};
+        let trainingData = {};
+        
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DocBot Enterprise initialized successfully!');
+            initializeFieldFeedback();
+            loadInvoiceList();
+            loadVendorList();
+            setupDragAndDrop();
+        });
+        
+        // Navigation Functions
+        function showView(viewName, buttonElement) {
+            // Hide all views
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.add('hidden');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected view
+            const targetView = document.getElementById(viewName + '-view');
+            if (targetView) {
+                targetView.classList.remove('hidden');
+            }
+            
+            // Set active nav button
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            } else {
+                // Fallback - find the correct button
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    if (btn.textContent.toLowerCase().includes(viewName.toLowerCase())) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+            
+            // Load view-specific data
+            switch(viewName) {
+                case 'invoices':
+                    loadInvoiceList();
+                    break;
+                case 'vendors':
+                    loadVendorList();
+                    break;
+            }
+        }
+        
+        // Sidebar Functions
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('show');
+        }
+        
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('show');
+        }
+        
+        // Sidebar Menu Actions
+        function showApiDocs() {
+            closeSidebar();
+            showToast('API Documentation', 'Complete API documentation with endpoints, authentication, and examples available in the developer portal.', 'info');
+        }
+        
+        function showSystemHealth() {
+            closeSidebar();
+            showToast('System Health', 'All systems operational - OCR Engine: 99.9% uptime, Processing Queue: 0 pending, API Response: 145ms avg', 'success');
+        }
+        
+        function showSettings() {
+            closeSidebar();
+            showToast('Settings', 'Settings panel with OCR confidence thresholds, notification preferences, and integration options coming soon!', 'info');
+        }
+        
+        function showHelp() {
+            closeSidebar();
+            showToast('Help Center', 'Access comprehensive guides, tutorials, and troubleshooting resources in the help portal.', 'info');
+        }
+        
+        function showAbout() {
+            closeSidebar();
+            showToast('About DocBot Enterprise', 'Version 2.1.0 - AI-powered invoice automation with advanced OCR, machine learning feedback, and enterprise integration capabilities.', 'info');
+        }
+        
+        // Field Feedback System
+        function initializeFieldFeedback() {
+            fieldFeedback = {
+                'invoiceNumber': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'vendorName': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'invoiceDate': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'dueDate': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'totalAmount': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'taxAmount': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'poNumber': { status: null, originalValue: '', correctedValue: '', confidence: 0 },
+                'description': { status: null, originalValue: '', correctedValue: '', confidence: 0 }
+            };
+            updateTrainingSummary();
         }
 
-        console.log('✅ DocBot Enterprise landing page loaded!');
-        console.log('🔗 Full app available at: app.html');
-        console.log('📊 Backend API: https://docbot-enterprise-backend.onrender.com');
+        function setFieldFeedback(button) {
+            const fieldName = button.dataset.field;
+            const feedbackType = button.dataset.type;
+            const fieldElement = document.getElementById(fieldName);
+            
+            // Clear previous feedback buttons for this field
+            const allButtons = document.querySelectorAll(`[data-field="${fieldName}"]`);
+            allButtons.forEach(btn => {
+                btn.classList.remove('approved', 'minor-fix', 'major-fix', 'active');
+            });
+            
+            // Set active state
+            button.classList.add(feedbackType, 'active');
+            
+            // Update feedback data
+            const originalValue = fieldElement.dataset.original || '';
+            const currentValue = fieldElement.value || '';
+            
+            fieldFeedback[fieldName] = {
+                status: feedbackType,
+                originalValue: originalValue,
+                correctedValue: currentValue,
+                confidence: getFieldConfidence(fieldName),
+                hasChanged: originalValue !== currentValue
+            };
+            
+            // Create training data entry
+            if (feedbackType === 'minor-fix' || feedbackType === 'major-fix') {
+                trainingData[fieldName] = {
+                    field: fieldName,
+                    extractedValue: originalValue,
+                    correctedValue: currentValue,
+                    feedbackType: feedbackType,
+                    confidence: getFieldConfidence(fieldName),
+                    timestamp: new Date().toISOString()
+                };
+                
+                showToast(
+                    'AI Learning Update', 
+                    `OCR model will learn from your ${feedbackType.replace('-', ' ')} correction to improve future accuracy.`,
+                    'info'
+                );
+            } else if (feedbackType === 'approved') {
+                showToast(
+                    'Field Approved', 
+                    'OCR extraction confirmed as accurate. This reinforces the model\'s confidence.',
+                    'success'
+                );
+            }
+            
+            updateTrainingSummary();
+            
+            // Add delighter animation
+            button.classList.add('delighter');
+            setTimeout(() => button.classList.remove('delighter'), 800);
+        }
+
+        function markFieldChanged(fieldElement) {
+            fieldElement.classList.add('changed');
+            
+            // Update feedback if already set
+            const fieldName = fieldElement.id;
+            if (fieldFeedback[fieldName] && fieldFeedback[fieldName].status) {
+                const originalValue = fieldElement.dataset.original || '';
+                const currentValue = fieldElement.value || '';
+                
+                fieldFeedback[fieldName].correctedValue = currentValue;
+                fieldFeedback[fieldName].hasChanged = originalValue !== currentValue;
+                
+                // If field has feedback and was changed, update training data
+                if (fieldFeedback[fieldName].status === 'minor-fix' || fieldFeedback[fieldName].status === 'major-fix') {
+                    trainingData[fieldName] = {
+                        ...trainingData[fieldName],
+                        correctedValue: currentValue
+                    };
+                }
+            }
+            
+            updateTrainingSummary();
+        }
+
+        function getFieldConfidence(fieldName) {
+            const confidenceMap = {
+                'invoiceNumber': 0.95,
+                'vendorName': 0.88,
+                'totalAmount': 0.92,
+                'taxAmount': 0.85,
+                'invoiceDate': 0.90,
+                'dueDate': 0.87,
+                'poNumber': 0.75,
+                'description': 0.70
+            };
+            return confidenceMap[fieldName] || 0.80;
+        }
+
+        function updateTrainingSummary() {
+            let approvedCount = 0;
+            let minorFixCount = 0;
+            let majorFixCount = 0;
+            
+            Object.values(fieldFeedback).forEach(feedback => {
+                if (feedback.status === 'approved') approvedCount++;
+                else if (feedback.status === 'minor-fix') minorFixCount++;
+                else if (feedback.status === 'major-fix') majorFixCount++;
+            });
+            
+            document.getElementById('approvedCount').textContent = approvedCount;
+            document.getElementById('minorFixesCount').textContent = minorFixCount;
+            document.getElementById('majorFixesCount').textContent = majorFixCount;
+        }
+        
+        // Toast Notification System
+        function showToast(title, message, type = 'success') {
+            const toastContainer = document.getElementById('toastContainer');
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="toast-header">${title}</div>
+                <div class="toast-body">${message}</div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Show toast with animation
+            setTimeout(() => toast.classList.add('show'), 100);
+            
+            // Remove toast after delay
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 400);
+            }, 4000);
+        }
+        
+        // File Upload Functions
+        function setupDragAndDrop() {
+            const uploadArea = document.getElementById('uploadArea');
+            if (!uploadArea) return;
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFileSelection(files[0]);
+                }
+            });
+        }
+        
+        function handleFileSelect(input) {
+            const file = input.files[0];
+            if (file) {
+                handleFileSelection(file);
+            }
+        }
+        
+        function handleFileSelection(file) {
+            selectedFile = file;
+            previewUrl = URL.createObjectURL(file);
+            
+            // Enable buttons
+            document.getElementById('processNowBtn').disabled = false;
+            document.getElementById('processLaterBtn').disabled = false;
+            
+            // Show success message
+            document.getElementById('uploadStatus').innerHTML = 
+                `<div class="success-message">Selected: ${file.name} (${Math.round(file.size/1024)}KB)</div>`;
+        }
+        
+        async function processNow() {
+            if (!selectedFile) return;
+            
+            // Show loading
+            document.getElementById('uploadStatus').innerHTML = 
+                '<div class="loading">Processing invoice with AI OCR...</div>';
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Mock OCR results
+                const mockResults = {
+                    invoice_number: 'INV-2024-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0'),
+                    vendor_name: 'Mock Vendor Inc',
+                    invoice_date: new Date().toISOString().split('T')[0],
+                    due_date: new Date(Date.now() + 30*24*60*60*1000).toISOString().split('T')[0],
+                    total_amount: (Math.random() * 5000 + 100).toFixed(2),
+                    tax_amount: (Math.random() * 500 + 10).toFixed(2),
+                    confidence_scores: {
+                        invoice_number: 0.95,
+                        vendor_name: 0.87,
+                        total_amount: 0.92
+                    }
+                };
+                
+                // Store for review
+                currentInvoiceData = mockResults;
+                
+                document.getElementById('uploadStatus').innerHTML = 
+                    '<div class="success-message">Invoice processed successfully! Opening review interface...</div>';
+                
+                // Switch to review view after a moment
+                setTimeout(() => {
+                    loadInvoiceForReview(mockResults);
+                    showView('review', null);
+                }, 1500);
+                
+            } catch (error) {
+                document.getElementById('uploadStatus').innerHTML = 
+                    `<div class="error-message">Error processing invoice: ${error.message}</div>`;
+            }
+        }
+        
+        function processLater() {
+            if (!selectedFile) return;
+            
+            document.getElementById('uploadStatus').innerHTML = 
+                '<div class="success-message">Invoice queued for batch processing. You will be notified when processing is complete.</div>';
+            
+            showToast('Invoice Queued', 'Your invoice has been queued for batch processing. You\'ll receive a notification when it\'s ready for review.', 'info');
+            
+            // Reset form
+            setTimeout(() => {
+                selectedFile = null;
+                previewUrl = null;
+                document.getElementById('processNowBtn').disabled = true;
+                document.getElementById('processLaterBtn').disabled = true;
+                document.getElementById('fileInput').value = '';
+                document.getElementById('uploadStatus').innerHTML = '';
+            }, 2000);
+        }
+        
+        // Review Functions
+        function loadInvoiceForReview(invoiceData) {
+            // Create document preview
+            if (selectedFile && previewUrl) {
+                createDocumentPreview(selectedFile);
+            }
+            
+            // Populate form with OCR results
+            if (invoiceData) {
+                document.getElementById('invoiceNumber').value = invoiceData.invoice_number || '';
+                document.getElementById('vendorName').value = invoiceData.vendor_name || '';
+                document.getElementById('invoiceDate').value = invoiceData.invoice_date || '';
+                document.getElementById('dueDate').value = invoiceData.due_date || '';
+                document.getElementById('totalAmount').value = invoiceData.total_amount || '';
+                document.getElementById('taxAmount').value = invoiceData.tax_amount || '';
+                document.getElementById('poNumber').value = invoiceData.po_number || '';
+                document.getElementById('description').value = invoiceData.description || '';
+                
+                // Store original values
+                Object.keys(invoiceData).forEach(key => {
+                    const camelKey = key.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
+                    const element = document.getElementById(camelKey);
+                    if (element) {
+                        element.dataset.original = invoiceData[key] || '';
+                    }
+                });
+            }
+        }
+        
+        function createDocumentPreview(file) {
+            const previewContent = document.getElementById('documentPreview');
+            
+            if (!file) {
+                previewContent.innerHTML = `
+                    <div class="preview-placeholder">
+                        <div class="preview-icon">📄</div>
+                        <div>No document selected</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const fileType = file.type;
+            
+            if (fileType === 'application/pdf') {
+                previewContent.innerHTML = `
+                    <embed src="${previewUrl}" type="application/pdf" width="100%" height="100%">
+                `;
+            } else if (fileType.startsWith('image/')) {
+                previewContent.innerHTML = `
+                    <img src="${previewUrl}" alt="${file.name}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                `;
+            } else {
+                previewContent.innerHTML = `
+                    <div class="preview-placeholder">
+                        <div class="preview-icon">📄</div>
+                        <div>Preview not available for ${file.name}</div>
+                        <div style="font-size: 0.875rem; color: var(--gray-500); margin-top: 0.5rem;">
+                            Supported formats: PDF, PNG, JPG
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        async function approveInvoice() {
+            // Check if any fields need feedback
+            let hasUnsetFeedback = false;
+            Object.keys(fieldFeedback).forEach(fieldName => {
+                const element = document.getElementById(fieldName);
+                if (element && element.value && !fieldFeedback[fieldName].status) {
+                    hasUnsetFeedback = true;
+                }
+            });
+            
+            if (hasUnsetFeedback) {
+                const proceed = confirm(
+                    'Some fields haven\'t been reviewed with feedback buttons. ' +
+                    'Proceeding will mark unreviewed fields as approved. Continue?'
+                );
+                
+                if (!proceed) return;
+                
+                // Auto-approve unset fields
+                Object.keys(fieldFeedback).forEach(fieldName => {
+                    const element = document.getElementById(fieldName);
+                    if (element && element.value && !fieldFeedback[fieldName].status) {
+                        fieldFeedback[fieldName].status = 'approved';
+                        const approveBtn = document.querySelector(`[data-field="${fieldName}"][data-type="approved"]`);
+                        if (approveBtn) {
+                            approveBtn.classList.add('approved');
+                        }
+                    }
+                });
+                updateTrainingSummary();
+            }
+            
+            // Save invoice with feedback data
+            await saveInvoiceWithFeedback();
+        }
+        
+        async function saveInvoiceWithFeedback() {
+            // Collect all form data
+            const invoiceData = {
+                id: Date.now(),
+                invoiceNumber: document.getElementById('invoiceNumber').value,
+                vendorName: document.getElementById('vendorName').value,
+                invoiceDate: document.getElementById('invoiceDate').value,
+                dueDate: document.getElementById('dueDate').value,
+                totalAmount: parseFloat(document.getElementById('totalAmount').value) || 0,
+                taxAmount: parseFloat(document.getElementById('taxAmount').value) || 0,
+                poNumber: document.getElementById('poNumber').value,
+                description: document.getElementById('description').value,
+                feedback: fieldFeedback,
+                trainingData: trainingData,
+                timestamp: new Date().toISOString(),
+                filename: selectedFile?.name || 'unknown'
+            };
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Success with delighter feedback
+                showToast(
+                    '🎉 Invoice Approved Successfully!', 
+                    'Your feedback has been captured and will improve OCR accuracy for future invoices. The AI model has been updated with your corrections.',
+                    'success'
+                );
+                
+                // Show celebration animation
+                const approveBtn = document.querySelector('.btn-success');
+                if (approveBtn) {
+                    approveBtn.classList.add('delighter');
+                    setTimeout(() => approveBtn.classList.remove('delighter'), 800);
+                }
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    resetReviewForm();
+                    showView('dashboard', document.querySelector('[onclick*=dashboard]'));
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error saving invoice:', error);
+                showToast(
+                    'Save Error', 
+                    'There was an issue saving the invoice. Please try again.',
+                    'error'
+                );
+            }
+        }
+        
+        async function saveForReview() {
+            showToast(
+                '💾 Invoice Saved for Review', 
+                'Invoice has been saved with your current feedback. You can continue reviewing later.',
+                'info'
+            );
+            
+            setTimeout(() => {
+                showView('dashboard', document.querySelector('[onclick*=dashboard]'));
+            }, 1500);
+        }
+        
+        function rejectInvoice() {
+            const reason = prompt('Please provide a reason for rejection:');
+            if (reason) {
+                showToast(
+                    '❌ Invoice Rejected', 
+                    `Invoice has been rejected. Reason: ${reason}. This feedback will help improve the OCR system.`,
+                    'error'
+                );
+                
+                // Clear any training data since invoice is rejected
+                trainingData = {};
+                
+                setTimeout(() => {
+                    resetReviewForm();
+                    showView('dashboard', document.querySelector('[onclick*=dashboard]'));
+                }, 2000);
+            }
+        }
+        
+        function resetReviewForm() {
+            // Clear form
+            document.querySelectorAll('#reviewForm input, #reviewForm textarea').forEach(input => {
+                input.value = '';
+                input.classList.remove('changed');
+                input.dataset.original = '';
+            });
+            
+            // Clear feedback buttons
+            document.querySelectorAll('.feedback-btn').forEach(btn => {
+                btn.classList.remove('approved', 'minor-fix', 'major-fix', 'active');
+            });
+            
+            // Reset feedback data
+            initializeFieldFeedback();
+            
+            // Clear document preview
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+                previewUrl = null;
+            }
+            
+            document.getElementById('documentPreview').innerHTML = `
+                <div class="preview-placeholder">
+                    <div class="preview-icon">📄</div>
+                    <div>Select an invoice to preview the original document</div>
+                </div>
+            `;
+            
+            // Clear global variables
+            selectedFile = null;
+            currentInvoiceData = null;
+        }
+        
+        // Sample Data
+        const sampleInvoices = [
+            {
+                id: 'INV-2024-001',
+                vendor: 'Acme Corporation',
+                amount: 1250.00,
+                date: '2024-01-15',
+                status: 'pending',
+                filename: 'acme-invoice-jan.pdf'
+            },
+            {
+                id: 'INV-2024-002',
+                vendor: 'Tech Solutions Inc',
+                amount: 3200.50,
+                date: '2024-01-14',
+                status: 'approved',
+                filename: 'tech-solutions.pdf'
+            },
+            {
+                id: 'INV-2024-003',
+                vendor: 'Office Supplies Co',
+                amount: 456.78,
+                date: '2024-01-13',
+                status: 'pending',
+                filename: 'office-supplies.pdf'
+            },
+            {
+                id: 'INV-2024-004',
+                vendor: 'CloudTech Services',
+                amount: 899.99,
+                date: '2024-01-12',
+                status: 'processing',
+                filename: 'cloudtech-monthly.pdf'
+            }
+        ];
+        
+        const sampleVendors = [
+            {
+                name: 'Acme Corporation',
+                email: 'billing@acme.com',
+                invoiceCount: 47,
+                avgAmount: 1850,
+                rating: 4.8
+            },
+            {
+                name: 'Tech Solutions Inc',
+                email: 'accounts@techsolutions.com',
+                invoiceCount: 23,
+                avgAmount: 3200,
+                rating: 4.6
+            },
+            {
+                name: 'Office Supplies Co',
+                email: 'invoices@officesupplies.com',
+                invoiceCount: 156,
+                avgAmount: 890,
+                rating: 4.9
+            },
+            {
+                name: 'CloudTech Services',
+                email: 'billing@cloudtech.io',
+                invoiceCount: 89,
+                avgAmount: 1250,
+                rating: 4.7
+            }
+        ];
+        
+        // Invoice List Functions
+        function loadInvoiceList() {
+            const invoiceList = document.getElementById('invoiceList');
+            if (!invoiceList) return;
+            
+            invoiceList.innerHTML = sampleInvoices.map(invoice => `
+                <div class="invoice-item" onclick="reviewInvoice('${invoice.id}')">
+                    <div class="invoice-info">
+                        <h4>${invoice.id}</h4>
+                        <p>${invoice.vendor} • $${invoice.amount.toFixed(2)} • ${invoice.date}</p>
+                    </div>
+                    <div class="invoice-status status-${invoice.status}">
+                        ${invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function switchInvoiceTab(tab, buttonElement) {
+            // Update active tab
+            document.querySelectorAll('.invoice-tab').forEach(t => t.classList.remove('active'));
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
+            
+            // Filter invoices
+            let filteredInvoices = sampleInvoices;
+            if (tab !== 'all') {
+                filteredInvoices = sampleInvoices.filter(invoice => invoice.status === tab);
+            }
+            
+            const invoiceList = document.getElementById('invoiceList');
+            invoiceList.innerHTML = filteredInvoices.map(invoice => `
+                <div class="invoice-item" onclick="reviewInvoice('${invoice.id}')">
+                    <div class="invoice-info">
+                        <h4>${invoice.id}</h4>
+                        <p>${invoice.vendor} • $${invoice.amount.toFixed(2)} • ${invoice.date}</p>
+                    </div>
+                    <div class="invoice-status status-${invoice.status}">
+                        ${invoice.status.charAt(0).toUpperCase() + invoice.status.slice(1)}
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function reviewInvoice(invoiceId) {
+            const invoice = sampleInvoices.find(inv => inv.id === invoiceId);
+            if (invoice) {
+                // Mock loading the actual invoice for review
+                loadInvoiceForReview({
+                    invoice_number: invoice.id,
+                    vendor_name: invoice.vendor,
+                    total_amount: invoice.amount,
+                    invoice_date: invoice.date,
+                    confidence_scores: {
+                        invoice_number: 0.95,
+                        vendor_name: 0.87,
+                        total_amount: 0.92
+                    }
+                });
+                showView('review', null);
+            }
+        }
+        
+        // Vendor Functions
+        function loadVendorList() {
+            const vendorGrid = document.getElementById('vendorGrid');
+            if (!vendorGrid) return;
+            
+            vendorGrid.innerHTML = sampleVendors.map(vendor => `
+                <div class="vendor-card">
+                    <div class="vendor-header">
+                        <div class="vendor-name">${vendor.name}</div>
+                        <div class="vendor-rating">${vendor.rating} ⭐</div>
+                    </div>
+                    <div class="vendor-email">${vendor.email}</div>
+                    <div class="vendor-stats">
+                        <div class="vendor-stat">
+                            <span class="vendor-stat-value">${vendor.invoiceCount}</span>
+                            <span class="vendor-stat-label">Invoices</span>
+                        </div>
+                        <div class="vendor-stat">
+                            <span class="vendor-stat-value">$${vendor.avgAmount}</span>
+                            <span class="vendor-stat-label">Avg Amount</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Quick Actions
+        function reviewPendingInvoices() {
+            showView('invoices', document.querySelector('[onclick*=invoices]'));
+            // Switch to pending tab after a brief delay
+            setTimeout(() => {
+                const pendingTab = document.querySelectorAll('.invoice-tab')[1];
+                if (pendingTab) {
+                    switchInvoiceTab('pending', pendingTab);
+                }
+            }, 100);
+        }
+        
+        function showReports() {
+            showToast(
+                'Analytics & Reports', 
+                'Comprehensive reporting dashboard with processing metrics, accuracy analysis, cost savings calculations, and vendor performance insights coming soon!',
+                'info'
+            );
+        }
     </script>
 </body>
 </html>
