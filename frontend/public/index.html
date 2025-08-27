@@ -289,6 +289,236 @@
             border-radius: var(--radius-lg);
         }
         
+        /* Analytics & Reports Page */
+        .reports-header {
+            margin-bottom: 2rem;
+        }
+        
+        .reports-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+        
+        .reports-subtitle {
+            color: var(--gray-600);
+            font-size: 1.125rem;
+        }
+        
+        .metrics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--card-accent, var(--primary));
+        }
+        
+        .metric-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .metric-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: var(--card-accent, var(--primary));
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gray-800);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: var(--gray-600);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .trend-up {
+            color: var(--success);
+        }
+        
+        .trend-down {
+            color: var(--error);
+        }
+        
+        .detailed-charts {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .large-chart-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .chart-tabs {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+            background: var(--gray-100);
+            padding: 0.25rem;
+            border-radius: var(--radius-lg);
+        }
+        
+        .chart-tab {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition-base);
+            font-weight: 500;
+            color: var(--gray-600);
+            background: transparent;
+            border: none;
+            font-size: 0.875rem;
+        }
+        
+        .chart-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .monthly-chart {
+            height: 300px;
+            background: linear-gradient(45deg, var(--gray-50) 0%, white 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: end;
+            gap: 0.25rem;
+            padding: 1.5rem;
+        }
+        
+        .monthly-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--primary), var(--primary-light));
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            animation: monthlyGrow 2s ease-out;
+        }
+        
+        .monthly-bar:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .monthly-bar::after {
+            content: attr(data-value);
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .monthly-bar:hover::after {
+            opacity: 1;
+        }
+        
+        @keyframes monthlyGrow {
+            from { height: 0; }
+            to { height: var(--bar-height, 50%); }
+        }
+        
+        .performance-metrics {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .performance-item {
+            background: var(--gray-50);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+        }
+        
+        .performance-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .performance-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-800);
+        }
+        
+        .performance-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+        
+        .performance-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--success-light));
+            border-radius: 4px;
+            transition: width 1.5s ease-out;
+            animation: fillGrow 2s ease-out;
+        }
+        
+        @keyframes fillGrow {
+            from { width: 0%; }
+            to { width: var(--fill-width, 50%); }
+        }
+        
         .nav-btn {
             flex: 1;
             padding: 0.875rem 1.5rem;
@@ -393,11 +623,12 @@
         }
         
         .chart-container {
-            height: 200px;
+            height: 220px;
             position: relative;
             background: linear-gradient(45deg, var(--gray-50) 0%, white 100%);
             border-radius: var(--radius-lg);
-            overflow: hidden;
+            overflow: visible;
+            padding: 10px;
         }
         
         .processing-chart {
@@ -406,6 +637,7 @@
             align-items: end;
             gap: 0.5rem;
             padding: 1rem;
+            min-height: 160px;
         }
         
         .chart-bar {
@@ -414,7 +646,10 @@
             border-radius: var(--radius-sm);
             position: relative;
             transition: all 0.3s ease;
-            animation: barGrow 1.5s ease-out;
+            animation: barGrow 2s ease-out forwards;
+            min-height: 20px;
+            transform-origin: bottom;
+            will-change: height, opacity, transform;
         }
         
         .chart-bar:hover {
@@ -424,15 +659,45 @@
         
         .chart-bar:nth-child(2n) {
             background: linear-gradient(to top, var(--secondary), var(--secondary-light));
+            animation-delay: 0.2s;
         }
         
         .chart-bar:nth-child(3n) {
             background: linear-gradient(to top, var(--accent), var(--accent-light));
+            animation-delay: 0.4s;
+        }
+        
+        .chart-bar:nth-child(4n) {
+            animation-delay: 0.6s;
+        }
+        
+        .chart-bar:nth-child(5n) {
+            animation-delay: 0.8s;
+        }
+        
+        .chart-bar:nth-child(6n) {
+            animation-delay: 1s;
+        }
+        
+        .chart-bar:nth-child(7n) {
+            animation-delay: 1.2s;
         }
         
         @keyframes barGrow {
-            from { height: 0; }
-            to { height: var(--bar-height, 50%); }
+            0% { 
+                height: 0; 
+                opacity: 0;
+                transform: scaleY(0);
+            }
+            30% { 
+                opacity: 0.7;
+                transform: scaleY(0.3);
+            }
+            100% { 
+                height: var(--bar-height, 50%); 
+                opacity: 1;
+                transform: scaleY(1);
+            }
         }
         
         .accuracy-ring {
@@ -728,6 +993,17 @@
             background: var(--gray-50);
             border-color: var(--primary);
             color: var(--primary);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, var(--error), var(--error-light));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-danger:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
         
         .btn:disabled {
@@ -1071,7 +1347,7 @@
         /* Vendor Grid */
         .vendor-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
         }
         
@@ -1079,14 +1355,34 @@
             background: white;
             border-radius: var(--radius-xl);
             padding: 1.5rem;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--gray-200);
-            transition: var(--transition-base);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
         .vendor-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--primary-light);
+        }
+        
+        .vendor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .vendor-card:hover::before {
+            opacity: 1;
         }
         
         .vendor-header {
@@ -1100,15 +1396,23 @@
             font-size: 1.125rem;
             font-weight: 700;
             color: var(--gray-800);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
         
         .vendor-rating {
-            background: linear-gradient(135deg, var(--warning), var(--warning-light));
+            background: linear-gradient(135deg, #F59E0B, #FCD34D);
             color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: var(--radius-md);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-full);
             font-size: 0.75rem;
             font-weight: 700;
+            box-shadow: 0 2px 4px rgba(245, 158, 11, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
         
         .vendor-email {
@@ -1125,9 +1429,25 @@
         
         .vendor-stat {
             text-align: center;
-            padding: 0.75rem;
-            background: var(--gray-50);
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--gray-50), var(--gray-100));
             border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
+            transition: all 0.2s ease;
+        }
+        
+        .vendor-stat:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .vendor-stat:hover .vendor-stat-value {
+            color: white;
+        }
+        
+        .vendor-stat:hover .vendor-stat-label {
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .vendor-stat-value {
@@ -1143,6 +1463,1634 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-top: 0.25rem;
+        }
+        
+        /* View Toggle Buttons */
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 0.25rem;
+        }
+        
+        .view-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .view-btn:hover {
+            background: var(--gray-200);
+            color: var(--gray-800);
+        }
+        
+        .view-btn.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .view-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        /* Vendor List View */
+        .vendor-list {
+            margin-top: 1.5rem;
+        }
+        
+        .vendor-table {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .vendor-table-header {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1.2fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .vendor-col {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .vendor-table-body {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        
+        .vendor-row {
+            display: grid;
+            grid-template-columns: 2fr 1.5fr 1fr 1.2fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--gray-100);
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .vendor-row:hover {
+            background: var(--gray-50);
+        }
+        
+        .vendor-row:last-child {
+            border-bottom: none;
+        }
+        
+        .vendor-cell {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+        
+        .vendor-cell.vendor-name-cell {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .vendor-name-text {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+        
+        .vendor-email-text {
+            color: var(--gray-600);
+            font-size: 0.75rem;
+        }
+        
+        .vendor-cell.vendor-amount-cell {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .vendor-status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: var(--success-light);
+            color: var(--success);
+        }
+        
+        .vendor-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .vendor-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            background: white;
+            color: var(--gray-600);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .vendor-action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Vendor Profile View */
+        .vendor-profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        
+        .vendor-profile-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .vendor-profile-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        .vendor-profile-main {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .vendor-info-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vendor-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+        
+        .vendor-avatar {
+            flex-shrink: 0;
+        }
+        
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .vendor-details {
+            flex: 1;
+        }
+        
+        .vendor-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        
+        .vendor-email {
+            margin: 0 0 1rem 0;
+            color: var(--gray-600);
+            font-size: 1rem;
+        }
+        
+        .vendor-rating-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .rating-stars {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .rating-label {
+            color: var(--gray-500);
+            font-size: 0.875rem;
+        }
+        
+        .vendor-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .vendor-stat-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vendor-stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        
+        .vendor-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .vendor-stat-card:hover::before {
+            opacity: 1;
+        }
+        
+        .stat-icon {
+            font-size: 1.75rem;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-light), rgba(59, 130, 246, 0.1));
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-content {
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .vendor-recent-invoices h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.25rem;
+            color: var(--gray-900);
+        }
+        
+        .recent-invoices-table {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+        
+        .invoice-table-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .invoice-table-body {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .invoice-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.875rem;
+        }
+        
+        .invoice-row:hover {
+            background: var(--gray-50);
+        }
+        
+        .invoice-row:last-child {
+            border-bottom: none;
+        }
+        
+        .vendor-profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .vendor-contact-card,
+        .vendor-notes-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vendor-contact-card:hover,
+        .vendor-notes-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        
+        .vendor-contact-card::before,
+        .vendor-notes-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .vendor-contact-card:hover::before,
+        .vendor-notes-card:hover::before {
+            opacity: 1;
+        }
+        
+        .vendor-contact-card h4,
+        .vendor-notes-card h4 {
+            margin: 0 0 1rem 0;
+            font-size: 1.125rem;
+            color: var(--gray-900);
+        }
+        
+        .contact-item {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .contact-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+        
+        .contact-value {
+            color: var(--gray-900);
+            font-size: 0.875rem;
+        }
+        
+        .notes-content {
+            margin-bottom: 1rem;
+        }
+        
+        .notes-content p {
+            margin: 0;
+            color: var(--gray-700);
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+        }
+        
+        /* Responsive Vendor Profile */
+        @media (max-width: 768px) {
+            .vendor-profile-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .vendor-stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .vendor-info-card {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal-overlay.hidden {
+            display: none;
+        }
+        
+        .modal {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem 1rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: var(--gray-900);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--gray-500);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: var(--radius-md);
+            transition: all 0.2s ease;
+        }
+        
+        .modal-close:hover {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+        
+        .modal-body {
+            padding: 1.5rem 2rem;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            padding: 1rem 2rem 1.5rem 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: var(--gray-500);
+        }
+        
+        /* Analytics Page Styling */
+        .reports-header {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .reports-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .reports-subtitle {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .metrics-dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--card-accent, var(--primary));
+        }
+        
+        .metric-card.primary { --card-accent: var(--primary); }
+        .metric-card.secondary { --card-accent: var(--secondary); }
+        .metric-card.success { --card-accent: var(--success); }
+        .metric-card.warning { --card-accent: #F59E0B; }
+        
+        .metric-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .metric-value {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+        
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            background: var(--gray-100);
+        }
+        
+        .trend-up {
+            background: var(--success-light);
+            color: var(--success);
+        }
+        
+        .trend-down {
+            background: var(--error-light);
+            color: var(--success);
+        }
+        
+        .detailed-charts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .large-chart-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .large-chart-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .large-chart-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .chart-period {
+            font-size: 0.875rem;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-md);
+        }
+        
+        .chart-tabs {
+            display: flex;
+            gap: 0.25rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            padding: 0.25rem;
+        }
+        
+        .chart-tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .chart-tab:hover {
+            background: var(--gray-200);
+            color: var(--gray-800);
+        }
+        
+        .chart-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .monthly-chart {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            height: 200px;
+            gap: 0.5rem;
+        }
+        
+        .monthly-bar {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            height: var(--bar-height);
+            min-height: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .monthly-bar:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+        
+        .performance-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .performance-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .performance-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-700);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .performance-value {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .metric-value-small {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+        
+        .performance-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        
+        .performance-fill {
+            height: 100%;
+            width: var(--fill-width);
+            background: linear-gradient(90deg, var(--success), var(--success-light));
+            border-radius: var(--radius-full);
+            transition: width 1s ease-in-out;
+        }
+        
+        .ai-insights {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-top: 1rem;
+        }
+        
+        .insights-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .insights-title span:first-child {
+            font-size: 1.5rem;
+        }
+        
+        .ai-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .ai-stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .ai-stat-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .ai-stat-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .ai-stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        /* Responsive Analytics */
+        @media (max-width: 1024px) {
+            .metrics-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .detailed-charts {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .metrics-dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .chart-tabs {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Settings Page Styling */
+        .settings-header {
+            margin-bottom: 2rem;
+        }
+        
+        .settings-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .settings-subtitle {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        .settings-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+        
+        .settings-nav {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+        
+        .settings-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: transparent;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            margin-bottom: 0.5rem;
+        }
+        
+        .settings-nav-btn:hover {
+            background: var(--gray-50);
+            color: var(--gray-800);
+        }
+        
+        .settings-nav-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+        }
+        
+        .settings-nav-btn:last-child {
+            margin-bottom: 0;
+        }
+        
+        .settings-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .settings-section {
+            display: none;
+        }
+        
+        .settings-section.active {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .settings-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .settings-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .settings-card-header {
+            padding: 2rem 2rem 1rem 2rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .settings-card-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .settings-card-header p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .settings-card-body {
+            padding: 2rem;
+        }
+        
+        .settings-card-footer {
+            padding: 1.5rem 2rem 2rem 2rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .profile-section {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .profile-avatar-section {
+            flex-shrink: 0;
+        }
+        
+        .profile-avatar {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        
+        .avatar-display {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .avatar-upload-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--gray-300);
+            color: var(--gray-600);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .avatar-upload-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .profile-form {
+            flex: 1;
+        }
+        
+        .preference-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .preference-item:last-child {
+            border-bottom: none;
+        }
+        
+        .preference-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 0 0 0.25rem 0;
+        }
+        
+        .preference-info p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin: 0;
+        }
+        
+        .preference-select {
+            min-width: 200px;
+        }
+        
+        /* License Settings */
+        .current-plan {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .plan-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .plan-status {
+            padding: 0.25rem 0.75rem;
+            background: var(--success-light);
+            color: var(--success);
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .plan-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .plan-feature {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .plan-feature:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-name {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+        }
+        
+        .feature-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+        
+        .plan-usage h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 0 0 1rem 0;
+        }
+        
+        .usage-item {
+            margin-bottom: 1rem;
+        }
+        
+        .usage-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .usage-info span:first-child {
+            color: var(--gray-700);
+        }
+        
+        .usage-info span:last-child {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+        
+        .usage-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        
+        .usage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: var(--radius-full);
+            transition: width 0.5s ease;
+        }
+        
+        /* Payment Settings */
+        .payment-method {
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1rem;
+        }
+        
+        .payment-method.primary {
+            border-color: var(--primary-light);
+            background: rgba(59, 130, 246, 0.02);
+        }
+        
+        .payment-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .payment-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .card-brand {
+            font-size: 2rem;
+        }
+        
+        .card-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .card-number {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+        
+        .card-name {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+        
+        .payment-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .primary-badge {
+            padding: 0.25rem 0.5rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .payment-action-btn {
+            padding: 0.375rem 0.75rem;
+            border: 1px solid var(--gray-300);
+            background: white;
+            color: var(--gray-600);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .payment-action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .add-payment-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            border: 2px dashed var(--gray-300);
+            background: transparent;
+            color: var(--gray-600);
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .add-payment-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+        
+        .billing-table {
+            width: 100%;
+        }
+        
+        .billing-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        
+        .billing-col {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .billing-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .billing-row:last-child {
+            border-bottom: none;
+        }
+        
+        .billing-cell {
+            font-size: 0.875rem;
+            color: var(--gray-900);
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-badge.paid {
+            background: var(--success-light);
+            color: var(--success);
+        }
+        
+        .billing-action-btn {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid var(--gray-300);
+            background: white;
+            color: var(--gray-600);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .billing-action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Notification Settings */
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 0 0 0.25rem 0;
+        }
+        
+        .notification-info p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-switch label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gray-300);
+            transition: 0.3s;
+            border-radius: 26px;
+        }
+        
+        .toggle-switch label:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        .toggle-switch input:checked + label {
+            background: var(--primary);
+        }
+        
+        .toggle-switch input:checked + label:before {
+            transform: translateX(24px);
+        }
+        
+        /* Security Settings */
+        .security-item {
+            margin-bottom: 2rem;
+        }
+        
+        .security-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .security-item h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin: 0 0 1rem 0;
+        }
+        
+        .security-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .security-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .security-info p {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            margin: 0;
+        }
+        
+        .security-action {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .security-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .security-badge.enabled {
+            background: var(--success-light);
+            color: var(--success);
+        }
+        
+        .password-strength {
+            margin-top: 0.5rem;
+        }
+        
+        .strength-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-200);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.25rem;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .strength-text {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+        }
+        
+        .strength-weak .strength-fill { width: 25%; background: var(--error); }
+        .strength-fair .strength-fill { width: 50%; background: #F59E0B; }
+        .strength-good .strength-fill { width: 75%; background: #10B981; }
+        .strength-strong .strength-fill { width: 100%; background: var(--success); }
+        
+        /* Security settings styling */
+        .security-buttons { display: flex; gap: 0.75rem; }
+        .security-badge.disabled { background: var(--gray-100); color: var(--gray-600); }
+        .security-action { display: flex; align-items: center; gap: 1rem; }
+        
+        /* Responsive Settings */
+        @media (max-width: 1024px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .settings-nav {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 0.5rem;
+            }
+            
+            .settings-nav-btn {
+                margin-bottom: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .billing-header,
+            .billing-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .billing-col {
+                display: none;
+            }
+            
+            .billing-cell {
+                padding: 0.5rem 0;
+                border-bottom: 1px solid var(--gray-100);
+            }
         }
         
         /* Toast Notifications */
@@ -1293,6 +3241,17 @@
                 grid-template-columns: 1fr;
             }
             
+            .vendor-table-header,
+            .vendor-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .vendor-cell {
+                padding: 0.25rem 0;
+                border-bottom: 1px solid var(--gray-100);
+            }
+            
             .training-stats {
                 grid-template-columns: 1fr;
             }
@@ -1352,6 +3311,166 @@
             .toast.show {
                 transform: translateY(0);
             }
+        }
+        
+        /* Compact styles for smaller charts */
+        .chart-container.compact {
+            height: 160px;
+            padding: 8px;
+        }
+        
+        .chart-card.compact {
+            max-width: 400px;
+        }
+        
+        .analytics-grid.compact {
+            gap: 1rem;
+        }
+        
+        .accuracy-ring.compact {
+            width: 120px;
+            height: 120px;
+        }
+        
+        .ai-insights.compact {
+            margin-top: 0.5rem;
+        }
+        
+        .ai-insights.compact .insights-list {
+            font-size: 0.8rem;
+        }
+        
+        .chart-card.wide {
+            grid-column: 1 / -1;
+            max-width: none;
+        }
+        
+        /* Enhanced tooltips */
+        .chart-bar {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .chart-bar:hover::after {
+            content: attr(data-amount) "\\A" attr(data-count);
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            white-space: pre-line;
+            text-align: center;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.2s ease;
+            min-width: 120px;
+        }
+        
+        .chart-bar:hover::before {
+            content: "";
+            position: absolute;
+            bottom: 105%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+        }
+        
+        .analytics-grid.compact-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .volume-card {
+            grid-column: 1;
+            min-width: 400px;
+        }
+        
+        .accuracy-card {
+            grid-column: 2;
+            min-width: 200px;
+        }
+        
+        /* Ensure parent containers use full width */
+        .charts-section {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .chart-card.compact {
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chart-container.compact {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Override any conflicting max-width constraints */\n        .analytics-grid.compact-row .chart-card {\n            max-width: none !important;\n        }\n        \n        /* Responsive design for bottom row cards */
+        @media (max-width: 768px) {
+            .analytics-grid.compact-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .volume-card,
+            .accuracy-card {
+                grid-column: 1;
+                min-width: unset;
+            }
+        }
+        
+        /* Mobile */
+        @media (max-width: 480px) {
+            .analytics-grid.compact-row {
+                gap: 8px;
+            }
+        }
+        
+        /* Chart period selector styling */\n        .chart-period-selector {\n            background: var(--gray-100);\n            color: var(--gray-600);\n            border: 1px solid var(--gray-200);\n            border-radius: var(--radius-sm);\n            padding: 0.25rem 0.5rem;\n            font-size: 0.75rem;\n            font-weight: 500;\n            cursor: pointer;\n            transition: all 0.2s ease;\n        }\n        \n        .chart-period-selector:hover {\n            background: var(--gray-200);\n            border-color: var(--gray-300);\n        }\n        \n        .chart-period-selector:focus {\n            outline: none;\n            border-color: var(--primary);\n            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);\n        }\n        \n        /* URGENT FIX: Force full width container */
+        .dashboard-view,
+        .charts-section,
+        .analytics-grid.compact-row {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-right: 0 !important;
+            padding-right: 0 !important;
+        }
+        
+        /* Force bottom row cards - 70/30 split */
+        .analytics-grid.compact-row {
+            display: flex !important;
+            width: 100% !important;
+            gap: 16px !important;
+            margin: 0 !important;
+        }
+        
+        /* Processing Volume card - 70% width */
+        .chart-card.volume-card {
+            flex: 0 0 calc(70% - 8px) !important;
+            max-width: calc(70% - 8px) !important;
+            min-width: unset !important;
+        }
+        
+        /* OCR Accuracy card - 30% width */
+        .chart-card.accuracy-card {
+            flex: 0 0 calc(30% - 8px) !important;
+            max-width: calc(30% - 8px) !important;
+            min-width: unset !important;
         }
     </style>
 </head>
@@ -1431,59 +3550,19 @@
                 <button class="nav-btn" onclick="showView('upload', this)">Upload</button>
                 <button class="nav-btn" onclick="showView('invoices', this)">Review</button>
                 <button class="nav-btn" onclick="showView('vendors', this)">Vendors</button>
+                <button class="nav-btn" onclick="showView('analytics', this)">Analytics</button>
+                <button class="nav-btn" onclick="showView('settings', this)">Settings</button>
             </nav>
             
             <!-- Dashboard View -->
             <div id="dashboard-view" class="view">
-                <!-- Analytics Section -->
+                <!-- Header Section -->
                 <div class="analytics-section">
                     <h2 class="analytics-title">AI-Powered Invoice Processing</h2>
                     <p class="analytics-subtitle">Real-time insights and performance metrics from your intelligent document processing system</p>
-                    
-                    <div class="analytics-grid">
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3 class="chart-title">📈 Processing Volume</h3>
-                                <span class="chart-period">Last 7 Days</span>
-                            </div>
-                            <div class="chart-container">
-                                <div class="processing-chart">
-                                    <div class="chart-bar" style="--bar-height: 65%;"></div>
-                                    <div class="chart-bar" style="--bar-height: 80%;"></div>
-                                    <div class="chart-bar" style="--bar-height: 45%;"></div>
-                                    <div class="chart-bar" style="--bar-height: 90%;"></div>
-                                    <div class="chart-bar" style="--bar-height: 75%;"></div>
-                                    <div class="chart-bar" style="--bar-height: 95%;"></div>
-                                    <div class="chart-bar" style="--bar-height: 85%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h3 class="chart-title">🎯 OCR Accuracy</h3>
-                                <span class="chart-period">This Month</span>
-                            </div>
-                            <div class="accuracy-ring">
-                                <div class="accuracy-inner">
-                                    <div class="accuracy-value">97.8%</div>
-                                    <div class="accuracy-label">Accuracy</div>
-                                </div>
-                            </div>
-                            <div class="ai-insights">
-                                <div class="insights-title">
-                                    <span>🤖</span>
-                                    <span>AI Insights</span>
-                                </div>
-                                <ul class="insights-list">
-                                    <li>Accuracy improved 12% this month</li>
-                                    <li>Best performance on invoice numbers</li>
-                                    <li>Learning from 847 user corrections</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
+                <!-- Stats Section -->
                 <div class="dashboard-grid stats-grid">
                     <div class="card stat-card primary">
                         <div class="stat-value">2,847</div>
@@ -1509,39 +3588,67 @@
                         <div class="stat-change">This quarter</div>
                     </div>
                 </div>
-                
-                <div class="dashboard-grid actions-grid">
-                    <div class="card action-card clickable primary" onclick="showView('upload', document.querySelector('[onclick*=upload]'))">
-                        <h3>Upload New Invoice</h3>
-                        <p>Process invoices with advanced AI-powered OCR extraction and automatic data validation</p>
-                    </div>
-                    
-                    <div class="card action-card clickable warning" onclick="reviewPendingInvoices()">
-                        <h3>Review Pending Items</h3>
-                        <p>Review and approve 23 invoices awaiting validation with side-by-side document comparison</p>
-                    </div>
-                    
-                    <div class="card action-card clickable secondary" onclick="showView('vendors', document.querySelector('[onclick*=vendors]'))">
-                        <h3>Vendor Management</h3>
-                        <p>Manage vendor profiles, payment terms, and track processing performance metrics</p>
-                    </div>
-                    
-                    <div class="card action-card clickable accent" onclick="showReports()">
-                        <h3>Analytics & Reports</h3>
-                        <p>Generate detailed reports on processing efficiency, accuracy rates, and cost savings</p>
+
+                <!-- Charts Section -->
+                <div class="charts-section">
+                    <div class="analytics-grid compact-row">
+                        <div class="chart-card compact volume-card">
+                            <div class="chart-header">
+                                <h3 class="chart-title">📈 Processing Volume</h3>
+                                <select class="chart-period-selector" id="volumePeriodSelector" onchange="updateVolumeChart(this.value)">
+                                    <option value="7days" selected>Last 7 Days</option>
+                                    <option value="30days">Last 30 Days</option>
+                                    <option value="90days">Last 90 Days</option>
+                                    <option value="1year">This Year</option>
+                                </select>
+                            </div>
+                            <div class="chart-container compact">
+                                <div class="processing-chart">
+                                    <div class="chart-bar" style="--bar-height: 65%;" title="Monday: $45,620" data-amount="$45,620" data-count="182 invoices"></div>
+                                    <div class="chart-bar" style="--bar-height: 80%;" title="Tuesday: $56,240" data-amount="$56,240" data-count="224 invoices"></div>
+                                    <div class="chart-bar" style="--bar-height: 45%;" title="Wednesday: $31,500" data-amount="$31,500" data-count="126 invoices"></div>
+                                    <div class="chart-bar" style="--bar-height: 90%;" title="Thursday: $63,000" data-amount="$63,000" data-count="252 invoices"></div>
+                                    <div class="chart-bar" style="--bar-height: 75%;" title="Friday: $52,500" data-amount="$52,500" data-count="210 invoices"></div>
+                                    <div class="chart-bar" style="--bar-height: 95%;" title="Saturday: $66,500" data-amount="$66,500" data-count="266 invoices"></div>
+                                    <div class="chart-bar" style="--bar-height: 85%;" title="Sunday: $59,500" data-amount="$59,500" data-count="238 invoices"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card compact accuracy-card">
+                            <div class="chart-header">
+                                <h3 class="chart-title">🎯 OCR Accuracy</h3>
+                                <select class="chart-period-selector" id="accuracyPeriodSelector" onchange="updateAccuracyChart(this.value)">
+                                    <option value="thismonth" selected>This Month</option>
+                                    <option value="lastmonth">Last Month</option>
+                                    <option value="last3months">Last 3 Months</option>
+                                    <option value="thisyear">This Year</option>
+                                </select>
+                            </div>
+                            <div class="accuracy-ring compact">
+                                <div class="accuracy-inner">
+                                    <div class="accuracy-value">97.8%</div>
+                                    <div class="accuracy-label">Accuracy</div>
+                                </div>
+                            </div>
+                            <div class="ai-insights compact">
+                                <div class="insights-title">
+                                    <span>🤖</span>
+                                    <span>AI Insights</span>
+                                </div>
+                                <ul class="insights-list">
+                                    <li>Accuracy improved 12% this month</li>
+                                    <li>Best performance on invoice numbers</li>
+                                    <li>Learning from 847 user corrections</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Upload View -->
             <div id="upload-view" class="view hidden">
-                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Back to Dashboard
-                </button>
-                
                 <div class="upload-section">
                     <div class="upload-header">
                         <h2 class="upload-title">Upload Invoice</h2>
@@ -1570,13 +3677,6 @@
             
             <!-- Review View -->
             <div id="review-view" class="view hidden">
-                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Back to Dashboard
-                </button>
-                
                 <div class="review-container">
                     <!-- Document Preview Panel -->
                     <div class="review-panel">
@@ -1737,13 +3837,6 @@
             
             <!-- Invoices View -->
             <div id="invoices-view" class="view hidden">
-                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Back to Dashboard
-                </button>
-                
                 <h2 style="color: var(--gray-800); margin-bottom: 2rem; font-size: 1.75rem; font-weight: 700;">Invoice Management</h2>
                 
                 <div class="invoice-tabs">
@@ -1757,19 +3850,719 @@
                 </div>
             </div>
             
+            <!-- Analytics & Reports View -->
+            <div id="analytics-view" class="view hidden">
+                <div class="reports-header">
+                    <h2 class="reports-title">Business Intelligence</h2>
+                    <p class="reports-subtitle">Real-time insights on cost savings, efficiency gains, and ROI from AI-powered invoice automation</p>
+                </div>
+                
+                <!-- Key Business Metrics -->
+                <div class="metrics-dashboard">
+                    <div class="metric-card success">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-value">$47.8K</div>
+                        <div class="metric-label">Monthly Cost Reduction</div>
+                        <div class="metric-trend trend-up">
+                            <span>↗</span>
+                            <span>Saves 3.2 FTE positions</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card primary">
+                        <div class="metric-icon">⚡</div>
+                        <div class="metric-value">89%</div>
+                        <div class="metric-label">Processing Time Reduction</div>
+                        <div class="metric-trend trend-up">
+                            <span>↗</span>
+                            <span>From 8 hours to 50 minutes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card secondary">
+                        <div class="metric-icon">📈</div>
+                        <div class="metric-value">287%</div>
+                        <div class="metric-label">ROI in First Year</div>
+                        <div class="metric-trend trend-up">
+                            <span>↗</span>
+                            <span>Platform paid for itself</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card warning">
+                        <div class="metric-icon">🎯</div>
+                        <div class="metric-value">97.8%</div>
+                        <div class="metric-label">Accuracy Rate</div>
+                        <div class="metric-trend trend-up">
+                            <span>↗</span>
+                            <span>Reduces audit risks</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Charts -->
+                <div class="detailed-charts">
+                    <div class="large-chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">💰 Cost Savings Trends</h3>
+                            <div class="chart-tabs">
+                                <button class="chart-tab active" onclick="switchChartTab('monthly', this)">Monthly</button>
+                                <button class="chart-tab" onclick="switchChartTab('weekly', this)">Weekly</button>
+                                <button class="chart-tab" onclick="switchChartTab('daily', this)">Daily</button>
+                            </div>
+                        </div>
+                        <div class="monthly-chart" id="trendChart">
+                            <div class="monthly-bar" style="--bar-height: 45%;" data-value="1,250"></div>
+                            <div class="monthly-bar" style="--bar-height: 60%;" data-value="1,680"></div>
+                            <div class="monthly-bar" style="--bar-height: 55%;" data-value="1,540"></div>
+                            <div class="monthly-bar" style="--bar-height: 75%;" data-value="2,100"></div>
+                            <div class="monthly-bar" style="--bar-height: 65%;" data-value="1,820"></div>
+                            <div class="monthly-bar" style="--bar-height: 85%;" data-value="2,380"></div>
+                            <div class="monthly-bar" style="--bar-height: 80%;" data-value="2,240"></div>
+                            <div class="monthly-bar" style="--bar-height: 90%;" data-value="2,520"></div>
+                            <div class="monthly-bar" style="--bar-height: 95%;" data-value="2,650"></div>
+                            <div class="monthly-bar" style="--bar-height: 88%;" data-value="2,460"></div>
+                            <div class="monthly-bar" style="--bar-height: 92%;" data-value="2,580"></div>
+                            <div class="monthly-bar" style="--bar-height: 100%;" data-value="2,847"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="large-chart-card">
+                        <div class="chart-header">
+                            <h3 class="chart-title">📊 Business Impact Metrics</h3>
+                        </div>
+                        <div class="performance-metrics">
+                            <div class="performance-item">
+                                <div class="performance-label">Staff Time Saved <span class="metric-value-small">≈ 3.2 FTE</span></div>
+                                <div class="performance-value">89%</div>
+                                <div class="performance-bar">
+                                    <div class="performance-fill" style="--fill-width: 89%;"></div>
+                                </div>
+                            </div>
+                            <div class="performance-item">
+                                <div class="performance-label">Processing Cost Reduction <span class="metric-value-small">$47.8K/mo</span></div>
+                                <div class="performance-value">84%</div>
+                                <div class="performance-bar">
+                                    <div class="performance-fill" style="--fill-width: 84%;"></div>
+                                </div>
+                            </div>
+                            <div class="performance-item">
+                                <div class="performance-label">Invoice Approval Speed <span class="metric-value-small">Same-day vs 5 days</span></div>
+                                <div class="performance-value">92%</div>
+                                <div class="performance-bar">
+                                    <div class="performance-fill" style="--fill-width: 92%;"></div>
+                                </div>
+                            </div>
+                            <div class="performance-item">
+                                <div class="performance-label">Compliance & Accuracy <span class="metric-value-small">Audit-ready</span></div>
+                                <div class="performance-value">97%</div>
+                                <div class="performance-bar">
+                                    <div class="performance-fill" style="--fill-width: 97%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Business Value Delivered -->
+                <div class="large-chart-card">
+                    <div class="chart-header">
+                        <h3 class="chart-title">🎯 Platform ROI Analysis</h3>
+                        <span class="chart-period">This Quarter</span>
+                    </div>
+                    <div class="ai-insights">
+                        <div class="insights-title">
+                            <span>💎</span>
+                            <span>Quantified Business Value</span>
+                        </div>
+                        <div class="ai-stats-grid">
+                            <div class="ai-stat-item">
+                                <div class="ai-stat-value">$573K</div>
+                                <div class="ai-stat-label">Total Cost Savings</div>
+                            </div>
+                            <div class="ai-stat-item">
+                                <div class="ai-stat-value">3.8 Days</div>
+                                <div class="ai-stat-label">Faster Invoice Cycle</div>
+                            </div>
+                            <div class="ai-stat-item">
+                                <div class="ai-stat-value">99.2%</div>
+                                <div class="ai-stat-label">Compliance Rate</div>
+                            </div>
+                            <div class="ai-stat-item">
+                                <div class="ai-stat-value">5.2x</div>
+                                <div class="ai-stat-label">Productivity Multiplier</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Vendors View -->
             <div id="vendors-view" class="view hidden">
-                <button class="back-btn" onclick="showView('dashboard', document.querySelector('[onclick*=dashboard]'))">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path d="M8 2L2 8L8 14M2 8H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    Back to Dashboard
-                </button>
+                <div class="vendor-header">
+                    <h2 style="color: var(--gray-800); margin-bottom: 0; font-size: 1.75rem; font-weight: 700;">Vendor Management</h2>
+                    
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="card" onclick="toggleVendorView('card', this)">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <rect x="1" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="9" y="1" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="1" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                            Card View
+                        </button>
+                        <button class="view-btn" data-view="list" onclick="toggleVendorView('list', this)">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                            List View
+                        </button>
+                    </div>
+                </div>
                 
-                <h2 style="color: var(--gray-800); margin-bottom: 2rem; font-size: 1.75rem; font-weight: 700;">Vendor Management</h2>
-                
+                <!-- Card View (Default) -->
                 <div class="vendor-grid" id="vendorGrid">
                     <!-- Vendor cards will be populated here -->
+                </div>
+                
+                <!-- List View (Hidden by default) -->
+                <div class="vendor-list hidden" id="vendorList">
+                    <div class="vendor-table">
+                        <div class="vendor-table-header">
+                            <div class="vendor-col vendor-name">Vendor Name</div>
+                            <div class="vendor-col vendor-contact">Contact</div>
+                            <div class="vendor-col vendor-invoices">Invoices</div>
+                            <div class="vendor-col vendor-amount">Total Amount</div>
+                            <div class="vendor-col vendor-status">Status</div>
+                            <div class="vendor-col vendor-actions">Actions</div>
+                        </div>
+                        <div class="vendor-table-body" id="vendorTableBody">
+                            <!-- Vendor rows will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vendor Profile View -->
+            <div id="vendor-profile-view" class="view hidden">
+                <div class="vendor-profile-header">
+                    <button class="back-btn" onclick="showView('vendors', document.querySelector('[onclick*=vendors]'))">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M12.5 15l-5-5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back to Vendors
+                    </button>
+                    <div class="vendor-profile-actions">
+                        <button class="btn-secondary" onclick="editCurrentVendor()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M11.013 2.513a1.75 1.75 0 1 1 2.474 2.474l-8.75 8.75a2.25 2.25 0 0 1-.892.596l-2.082.347.347-2.081a2.25 2.25 0 0 1 .596-.893l8.75-8.75z" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            Edit Vendor
+                        </button>
+                        <button class="btn-danger" onclick="deleteCurrentVendor()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 4h12M5 4V2.5a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5V4m2 0v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h10z" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M7 7v4M10 7v4" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            Delete
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="vendor-profile-content">
+                    <div class="vendor-profile-main">
+                        <div class="vendor-info-card">
+                            <div class="vendor-avatar">
+                                <div class="avatar-circle" id="vendorAvatar">AC</div>
+                            </div>
+                            <div class="vendor-details">
+                                <h1 class="vendor-title" id="vendorName">Acme Corporation</h1>
+                                <p class="vendor-email" id="vendorEmail">billing@acme.com</p>
+                                <div class="vendor-rating-display">
+                                    <span class="rating-stars" id="vendorRating">4.8 ⭐</span>
+                                    <span class="rating-label">Vendor Rating</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vendor-stats-grid">
+                            <div class="vendor-stat-card">
+                                <div class="stat-icon">📄</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="totalInvoices">47</div>
+                                    <div class="stat-label">Total Invoices</div>
+                                </div>
+                            </div>
+                            <div class="vendor-stat-card">
+                                <div class="stat-icon">💰</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="avgAmount">$1,850</div>
+                                    <div class="stat-label">Average Amount</div>
+                                </div>
+                            </div>
+                            <div class="vendor-stat-card">
+                                <div class="stat-icon">📅</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="lastInvoice">Jan 15, 2025</div>
+                                    <div class="stat-label">Last Invoice</div>
+                                </div>
+                            </div>
+                            <div class="vendor-stat-card">
+                                <div class="stat-icon">⚡</div>
+                                <div class="stat-content">
+                                    <div class="stat-number" id="vendorStatus">Active</div>
+                                    <div class="stat-label">Status</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="vendor-recent-invoices">
+                            <h3>Recent Invoices</h3>
+                            <div class="recent-invoices-table">
+                                <div class="invoice-table-header">
+                                    <div>Invoice ID</div>
+                                    <div>Date</div>
+                                    <div>Amount</div>
+                                    <div>Status</div>
+                                </div>
+                                <div class="invoice-table-body" id="vendorInvoiceList">
+                                    <!-- Recent invoices will be populated here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vendor-profile-sidebar">
+                        <div class="vendor-contact-card">
+                            <h4>Contact Information</h4>
+                            <div class="contact-item">
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value" id="vendorContactEmail">billing@acme.com</div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-label">Phone</div>
+                                <div class="contact-value" id="vendorPhone">+1 (555) 123-4567</div>
+                            </div>
+                            <div class="contact-item">
+                                <div class="contact-label">Address</div>
+                                <div class="contact-value" id="vendorAddress">123 Business St, Suite 100<br>New York, NY 10001</div>
+                            </div>
+                        </div>
+                        
+                        <div class="vendor-notes-card">
+                            <h4>Internal Notes</h4>
+                            <div class="notes-content" id="vendorNotes">
+                                <p>Reliable vendor with consistent payment patterns. Prefers PDF invoices via email.</p>
+                            </div>
+                            <button class="btn-secondary btn-sm" onclick="editVendorNotes()">Edit Notes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings View -->
+            <div id="settings-view" class="view hidden">
+                <div class="settings-header">
+                    <h2 class="settings-title">Settings</h2>
+                    <p class="settings-subtitle">Manage your account, license, and payment preferences</p>
+                </div>
+                
+                <div class="settings-container">
+                    <!-- Settings Navigation -->
+                    <div class="settings-nav">
+                        <button class="settings-nav-btn active" onclick="showSettingsSection('user', this)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2a4 4 0 100 8 4 4 0 000-8zM6 14a4 4 0 00-4 4v1h16v-1a4 4 0 00-4-4H6z" fill="currentColor"/>
+                            </svg>
+                            User Settings
+                        </button>
+                        <button class="settings-nav-btn" onclick="showSettingsSection('license', this)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 3a2 2 0 00-2 2v1h16V5a2 2 0 00-2-2H4zM18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zm-2.5 3a.5.5 0 11-1 0 .5.5 0 011 0z" fill="currentColor"/>
+                            </svg>
+                            License & Plan
+                        </button>
+                        <button class="settings-nav-btn" onclick="showSettingsSection('payments', this)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z" fill="currentColor"/>
+                                <path d="M6 8h2v2H6V8zM10 8h4v1h-4V8z" fill="currentColor"/>
+                            </svg>
+                            Payment & Billing
+                        </button>
+                        <button class="settings-nav-btn" onclick="showSettingsSection('notifications', this)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 2C7.8 2 6 3.8 6 6c0 2.4-1.2 3.6-2 4.2-.8.6-1 1.4-1 2.8h14c0-1.4-.2-2.2-1-2.8-.8-.6-2-1.8-2-4.2 0-2.2-1.8-4-4-4zM8 16a2 2 0 004 0H8z" fill="currentColor"/>
+                            </svg>
+                            Notifications
+                        </button>
+                        <button class="settings-nav-btn" onclick="showSettingsSection('security', this)">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 1L3 4v6c0 5.2 3.2 9.1 7 10 3.8-.9 7-4.8 7-10V4l-7-3z" fill="currentColor"/>
+                            </svg>
+                            Security
+                        </button>
+                    </div>
+                    
+                    <!-- Settings Content -->
+                    <div class="settings-content">
+                        <!-- User Settings Section -->
+                        <div id="user-settings" class="settings-section active">
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Profile Information</h3>
+                                    <p>Update your personal information and preferences</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="profile-section">
+                                        <div class="profile-avatar-section">
+                                            <div class="profile-avatar">
+                                                <div class="avatar-display">DU</div>
+                                                <button class="avatar-upload-btn">
+                                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                        <path d="M8 3L6 5h4L8 3zM3 6v7h10V6H3zm5 1a2 2 0 110 4 2 2 0 010-4z" fill="currentColor"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="profile-form">
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    <input type="text" class="form-input" value="Demo" id="userFirstName">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    <input type="text" class="form-input" value="User" id="userLastName">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Email Address</label>
+                                                <input type="email" class="form-input" value="demo@docbot.com" id="userEmail">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Job Title</label>
+                                                <input type="text" class="form-input" value="Finance Manager" id="userJobTitle">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Company</label>
+                                                <input type="text" class="form-input" value="DocBot Enterprise Demo" id="userCompany">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings-card-footer">
+                                    <button class="btn-primary" onclick="saveUserSettings()" id="saveUserBtn">Save Changes</button>
+                                    <button class="btn-secondary" onclick="resetUserForm()">Reset</button>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Preferences</h3>
+                                    <p>Customize your application experience</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="preference-item">
+                                        <div class="preference-info">
+                                            <h4>Theme</h4>
+                                            <p>Choose your preferred color scheme</p>
+                                        </div>
+                                        <select class="form-input preference-select">
+                                            <option value="light">Light</option>
+                                            <option value="dark">Dark</option>
+                                            <option value="auto">Auto</option>
+                                        </select>
+                                    </div>
+                                    <div class="preference-item">
+                                        <div class="preference-info">
+                                            <h4>Language</h4>
+                                            <p>Select your display language</p>
+                                        </div>
+                                        <select class="form-input preference-select">
+                                            <option value="en">English</option>
+                                            <option value="es">Spanish</option>
+                                            <option value="fr">French</option>
+                                            <option value="de">German</option>
+                                        </select>
+                                    </div>
+                                    <div class="preference-item">
+                                        <div class="preference-info">
+                                            <h4>Time Zone</h4>
+                                            <p>Your local time zone</p>
+                                        </div>
+                                        <select class="form-input preference-select">
+                                            <option value="PST">Pacific Standard Time (PST)</option>
+                                            <option value="MST">Mountain Standard Time (MST)</option>
+                                            <option value="CST">Central Standard Time (CST)</option>
+                                            <option value="EST">Eastern Standard Time (EST)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="settings-card-footer">
+                                    <button class="btn-primary" onclick="savePreferences()">Save Preferences</button>
+                                    <button class="btn-secondary" onclick="resetPreferences()">Reset to Defaults</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- License Settings Section -->
+                        <div id="license-settings" class="settings-section">
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Current Plan</h3>
+                                    <p>Manage your DocBot Enterprise subscription</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="current-plan">
+                                        <div class="plan-badge">
+                                            <span class="plan-name">Enterprise Pro</span>
+                                            <span class="plan-status">Active</span>
+                                        </div>
+                                        <div class="plan-details">
+                                            <div class="plan-feature">
+                                                <span class="feature-name">Monthly Processing Limit</span>
+                                                <span class="feature-value">10,000 invoices</span>
+                                            </div>
+                                            <div class="plan-feature">
+                                                <span class="feature-name">Users Included</span>
+                                                <span class="feature-value">25 seats</span>
+                                            </div>
+                                            <div class="plan-feature">
+                                                <span class="feature-name">Storage</span>
+                                                <span class="feature-value">500 GB</span>
+                                            </div>
+                                            <div class="plan-feature">
+                                                <span class="feature-name">API Access</span>
+                                                <span class="feature-value">Unlimited</span>
+                                            </div>
+                                            <div class="plan-feature">
+                                                <span class="feature-name">Support Level</span>
+                                                <span class="feature-value">Priority Support</span>
+                                            </div>
+                                        </div>
+                                        <div class="plan-usage">
+                                            <h4>Current Usage</h4>
+                                            <div class="usage-item">
+                                                <div class="usage-info">
+                                                    <span>Invoice Processing</span>
+                                                    <span>2,847 / 10,000</span>
+                                                </div>
+                                                <div class="usage-bar">
+                                                    <div class="usage-fill" style="width: 28.47%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="usage-item">
+                                                <div class="usage-info">
+                                                    <span>Active Users</span>
+                                                    <span>12 / 25</span>
+                                                </div>
+                                                <div class="usage-bar">
+                                                    <div class="usage-fill" style="width: 48%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="usage-item">
+                                                <div class="usage-info">
+                                                    <span>Storage Used</span>
+                                                    <span>187 GB / 500 GB</span>
+                                                </div>
+                                                <div class="usage-bar">
+                                                    <div class="usage-fill" style="width: 37.4%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings-card-footer">
+                                    <button class="btn-primary" onclick="showUpgradePlan()">Upgrade Plan</button>
+                                    <button class="btn-secondary" onclick="showAllPlans()">View All Plans</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Settings Section -->
+                        <div id="payments-settings" class="settings-section">
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Payment Methods</h3>
+                                    <p>Manage your billing information and payment methods</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="payment-method primary">
+                                        <div class="payment-info">
+                                            <div class="payment-card">
+                                                <div class="card-brand">💳</div>
+                                                <div class="card-details">
+                                                    <div class="card-number">•••• •••• •••• 4242</div>
+                                                    <div class="card-name">Demo User</div>
+                                                </div>
+                                            </div>
+                                            <div class="payment-actions">
+                                                <span class="primary-badge">Primary</span>
+                                                <button class="payment-action-btn" onclick="editPaymentMethod(0)">Edit</button>
+                                                <button class="payment-action-btn" onclick="removePaymentMethod(0)">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="add-payment-btn" onclick="addNewPaymentMethod()">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                            <path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                        </svg>
+                                        Add New Payment Method
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Billing History</h3>
+                                    <p>View and download your billing history</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="billing-table">
+                                        <div class="billing-header">
+                                            <div class="billing-col">Date</div>
+                                            <div class="billing-col">Description</div>
+                                            <div class="billing-col">Amount</div>
+                                            <div class="billing-col">Status</div>
+                                            <div class="billing-col">Actions</div>
+                                        </div>
+                                        <div class="billing-row">
+                                            <div class="billing-cell">Jan 1, 2025</div>
+                                            <div class="billing-cell">Enterprise Pro - Monthly</div>
+                                            <div class="billing-cell">$2,999.00</div>
+                                            <div class="billing-cell"><span class="status-badge paid">Paid</span></div>
+                                            <div class="billing-cell">
+                                                <button class="billing-action-btn" onclick="downloadInvoice('INV-2025-001')">Download</button>
+                                            </div>
+                                        </div>
+                                        <div class="billing-row">
+                                            <div class="billing-cell">Dec 1, 2024</div>
+                                            <div class="billing-cell">Enterprise Pro - Monthly</div>
+                                            <div class="billing-cell">$2,999.00</div>
+                                            <div class="billing-cell"><span class="status-badge paid">Paid</span></div>
+                                            <div class="billing-cell">
+                                                <button class="billing-action-btn" onclick="downloadInvoice('INV-2024-012')">Download</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Notification Settings Section -->
+                        <div id="notifications-settings" class="settings-section">
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Email Notifications</h3>
+                                    <p>Choose what notifications you want to receive</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="form-group">
+                                        <label>Notification Email Address</label>
+                                        <input type="email" class="form-input" value="demo@docbot.com" id="notificationEmail" placeholder="Enter email for notifications">
+                                        <p style="font-size: 0.875rem; color: var(--gray-500); margin-top: 0.5rem;">This email will receive all selected notifications</p>
+                                    </div>
+                                    
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Invoice Processing Alerts</h4>
+                                            <p>Get notified when invoices are processed or require attention</p>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="processing-alerts" checked>
+                                            <label for="processing-alerts"></label>
+                                        </div>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>Monthly Reports</h4>
+                                            <p>Receive monthly analytics and performance summaries</p>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="monthly-reports" checked>
+                                            <label for="monthly-reports"></label>
+                                        </div>
+                                    </div>
+                                    <div class="notification-item">
+                                        <div class="notification-info">
+                                            <h4>System Maintenance</h4>
+                                            <p>Get advance notice of scheduled maintenance</p>
+                                        </div>
+                                        <div class="toggle-switch">
+                                            <input type="checkbox" id="maintenance-alerts" checked>
+                                            <label for="maintenance-alerts"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="settings-card-footer">
+                                    <button class="btn-primary" onclick="saveNotificationSettings()">Save Notification Settings</button>
+                                    <button class="btn-secondary" onclick="testNotifications()">Send Test Email</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Security Settings Section -->
+                        <div id="security-settings" class="settings-section">
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Password & Authentication</h3>
+                                    <p>Manage your account security settings</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="security-item">
+                                        <h4>Change Password</h4>
+                                        <div class="form-group">
+                                            <label>Current Password</label>
+                                            <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>New Password</label>
+                                            <input type="password" class="form-input" id="newPassword" placeholder="Enter new password">
+                                            <div class="password-strength" id="passwordStrength" style="display: none;">
+                                                <div class="strength-bar">
+                                                    <div class="strength-fill"></div>
+                                                </div>
+                                                <div class="strength-text">Password strength: <span></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirm New Password</label>
+                                            <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password">
+                                        </div>
+                                        <div class="settings-card-footer" style="padding-top: 1.5rem; margin-top: 1.5rem; border-top: 1px solid var(--gray-200);">
+                                            <button class="btn-primary" onclick="updatePassword()" id="updatePasswordBtn">Update Password</button>
+                                            <button class="btn-secondary" onclick="cancelPasswordChange()">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-card">
+                                <div class="settings-card-header">
+                                    <h3>Two-Factor Authentication</h3>
+                                    <p>Add an extra layer of security to your account</p>
+                                </div>
+                                <div class="settings-card-body">
+                                    <div class="security-item">
+                                        <div class="security-status">
+                                            <div class="security-info">
+                                                <h4>Authenticator App</h4>
+                                                <p>Use an authenticator app for secure login</p>
+                                            </div>
+                                            <div class="security-action">
+                                                <span class="security-badge enabled">Enabled</span>
+                                                <div class="security-buttons">
+                                                    <button class="btn-primary" onclick="configure2FA()">Configure</button>
+                                                    <button class="btn-secondary" onclick="disable2FA()">Disable</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -1777,6 +4570,74 @@
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
+    
+    <!-- Edit Vendor Modal -->
+    <div class="modal-overlay hidden" id="editVendorModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit Vendor</h3>
+                <button class="modal-close" onclick="closeEditVendorModal()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editVendorForm">
+                    <div class="form-group">
+                        <label for="editVendorName">Vendor Name</label>
+                        <input type="text" id="editVendorName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editVendorEmail">Email</label>
+                        <input type="email" id="editVendorEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editVendorPhone">Phone</label>
+                        <input type="tel" id="editVendorPhone" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="editVendorAddress">Address</label>
+                        <textarea id="editVendorAddress" class="form-input" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editVendorRating">Rating</label>
+                        <input type="number" id="editVendorRating" class="form-input" min="1" max="5" step="0.1">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditVendorModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveVendorChanges()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Notes Modal -->
+    <div class="modal-overlay hidden" id="editNotesModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit Internal Notes</h3>
+                <button class="modal-close" onclick="closeEditNotesModal()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editNotesForm">
+                    <div class="form-group">
+                        <label for="editVendorNotes">Notes</label>
+                        <textarea id="editVendorNotes" class="form-input" rows="6" placeholder="Add internal notes about this vendor..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditNotesModal()">Cancel</button>
+                <button class="btn-primary" onclick="saveNotesChanges()">Save Notes</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Global variables
@@ -1795,7 +4656,7 @@
             setupDragAndDrop();
         });
         
-        // Navigation Functions
+        // Period Picker Functions\n        function updateVolumeChart(period) {\n            const chart = document.querySelector('.processing-chart');\n            const chartData = {\n                '7days': {\n                    data: [65, 80, 45, 90, 75, 95, 85],\n                    amounts: ['$45,620', '$56,240', '$31,500', '$63,000', '$52,500', '$66,500', '$59,500'],\n                    counts: ['182 invoices', '224 invoices', '126 invoices', '252 invoices', '210 invoices', '266 invoices', '238 invoices'],\n                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n                },\n                '30days': {\n                    data: [70, 85, 60, 95, 80, 88, 92, 78, 82, 90, 85, 93, 87, 89, 91, 84, 86, 88, 90, 85, 87, 89, 91, 86, 84, 88, 90, 87, 89, 91],\n                    amounts: ['$1.2M', '$1.8M', '$1.1M', '$2.1M', '$1.6M', '$1.9M', '$2.0M', '$1.4M', '$1.7M', '$2.2M', '$1.8M', '$2.3M', '$1.9M', '$2.1M', '$2.2M', '$1.7M', '$1.8M', '$1.9M', '$2.0M', '$1.8M', '$1.9M', '$2.1M', '$2.2M', '$1.8M', '$1.7M', '$1.9M', '$2.0M', '$1.9M', '$2.1M', '$2.2M'],\n                    counts: ['4.2K invoices', '6.1K invoices', '3.8K invoices', '7.2K invoices', '5.5K invoices', '6.8K invoices', '7.0K invoices', '4.9K invoices', '5.8K invoices', '7.5K invoices', '6.1K invoices', '8.0K invoices', '6.5K invoices', '7.2K invoices', '7.6K invoices', '5.9K invoices', '6.2K invoices', '6.5K invoices', '6.8K invoices', '6.1K invoices', '6.5K invoices', '7.2K invoices', '7.6K invoices', '6.2K invoices', '5.9K invoices', '6.5K invoices', '6.8K invoices', '6.5K invoices', '7.2K invoices', '7.6K invoices'],\n                    labels: Array.from({length: 30}, (_, i) => `Day ${i + 1}`)\n                },\n                '90days': {\n                    data: [75, 82, 68, 88, 79, 85, 91, 76, 83, 89],\n                    amounts: ['$3.2M', '$4.1M', '$2.9M', '$4.8M', '$3.6M', '$4.3M', '$5.1M', '$3.4M', '$4.2M', '$4.9M'],\n                    counts: ['12K invoices', '16K invoices', '11K invoices', '19K invoices', '14K invoices', '17K invoices', '21K invoices', '13K invoices', '16K invoices', '20K invoices'],\n                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8', 'Week 9', 'Week 10']\n                },\n                '1year': {\n                    data: [78, 85, 72, 90, 82, 88, 94, 79, 86, 91, 87, 93],\n                    amounts: ['$12M', '$15M', '$10M', '$18M', '$13M', '$16M', '$20M', '$11M', '$17M', '$19M', '$14M', '$21M'],\n                    counts: ['45K invoices', '58K invoices', '38K invoices', '72K invoices', '49K invoices', '65K invoices', '84K invoices', '42K invoices', '$68K invoices', '78K invoices', '52K invoices', '89K invoices'],\n                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n                }\n            };\n\n            const selectedData = chartData[period];\n            const bars = chart.querySelectorAll('.chart-bar');\n            \n            bars.forEach((bar, index) => {\n                if (index < selectedData.data.length) {\n                    bar.style.setProperty('--bar-height', selectedData.data[index] + '%');\n                    bar.setAttribute('data-amount', selectedData.amounts[index]);\n                    bar.setAttribute('data-count', selectedData.counts[index]);\n                    bar.setAttribute('title', `${selectedData.labels[index]}: ${selectedData.amounts[index]}`);\n                    bar.style.display = 'block';\n                } else {\n                    bar.style.display = 'none';\n                }\n            });\n        }\n        \n        function updateAccuracyChart(period) {\n            const accuracyValue = document.querySelector('.accuracy-value');\n            const insights = document.querySelector('.ai-insights.compact .insights-list');\n            \n            const accuracyData = {\n                'thismonth': {\n                    accuracy: '97.8%',\n                    insights: [\n                        'Accuracy improved 12% this month',\n                        'Best performance on invoice numbers', \n                        'Learning from 847 user corrections'\n                    ]\n                },\n                'lastmonth': {\n                    accuracy: '95.2%',\n                    insights: [\n                        'Processed 2,156 invoices last month',\n                        'Strong performance on vendor names',\n                        'Identified 23 new vendor patterns'\n                    ]\n                },\n                'last3months': {\n                    accuracy: '94.1%',\n                    insights: [\n                        'Consistent 3% monthly improvement',\n                        'Vendor accuracy increased 15%',\n                        'Processed 6,847 invoices total'\n                    ]\n                },\n                'thisyear': {\n                    accuracy: '92.5%',\n                    insights: [\n                        'Year-over-year improvement: 18%',\n                        'Total invoices processed: 28,451',\n                        'AI learned 156 new patterns'\n                    ]\n                }\n            };\n            \n            const selectedData = accuracyData[period];\n            accuracyValue.textContent = selectedData.accuracy;\n            \n            insights.innerHTML = selectedData.insights.map(insight => `<li>${insight}</li>`).join('');\n            \n            // Update the ring gradient\n            const ring = document.querySelector('.accuracy-ring.compact');\n            const percentage = parseFloat(selectedData.accuracy);\n            const degrees = (percentage / 100) * 360;\n            ring.style.background = `conic-gradient(\n                var(--success) 0deg ${degrees}deg,\n                var(--gray-200) ${degrees}deg 360deg\n            )`;\n        }\n        \n        // Navigation Functions
         function showView(viewName, buttonElement) {
             // Hide all views
             document.querySelectorAll('.view').forEach(view => {
@@ -2485,12 +5346,14 @@
         // Vendor Functions
         function loadVendorList() {
             const vendorGrid = document.getElementById('vendorGrid');
-            if (!vendorGrid) return;
+            const vendorTableBody = document.getElementById('vendorTableBody');
+            if (!vendorGrid || !vendorTableBody) return;
             
-            vendorGrid.innerHTML = sampleVendors.map(vendor => `
-                <div class="vendor-card">
+            // Populate card view
+            vendorGrid.innerHTML = sampleVendors.map((vendor, index) => `
+                <div class="vendor-card" onclick="showVendorDetails(${index})">
                     <div class="vendor-header">
-                        <div class="vendor-name">${vendor.name}</div>
+                        <div class="vendor-name" title="${vendor.name}">${vendor.name}</div>
                         <div class="vendor-rating">${vendor.rating} ⭐</div>
                     </div>
                     <div class="vendor-email">${vendor.email}</div>
@@ -2506,6 +5369,263 @@
                     </div>
                 </div>
             `).join('');
+            
+            // Populate list view
+            vendorTableBody.innerHTML = sampleVendors.map((vendor, index) => `
+                <div class="vendor-row" onclick="showVendorDetails(${index})">
+                    <div class="vendor-cell vendor-name-cell">
+                        <div class="vendor-name-text" title="${vendor.name}">${vendor.name}</div>
+                        <div class="vendor-email-text">${vendor.email}</div>
+                    </div>
+                    <div class="vendor-cell">${vendor.email}</div>
+                    <div class="vendor-cell">${vendor.invoiceCount}</div>
+                    <div class="vendor-cell vendor-amount-cell">$${vendor.avgAmount.toLocaleString()}</div>
+                    <div class="vendor-cell">
+                        <span class="vendor-status-badge">Active</span>
+                    </div>
+                    <div class="vendor-cell">
+                        <div class="vendor-actions">
+                            <button class="vendor-action-btn" onclick="event.stopPropagation(); editVendor(${index})">Edit</button>
+                            <button class="vendor-action-btn" onclick="event.stopPropagation(); deleteVendor(${index})">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function toggleVendorView(viewType, buttonElement) {
+            console.log('toggleVendorView called with:', viewType, buttonElement);
+            
+            const cardView = document.getElementById('vendorGrid');
+            const listView = document.getElementById('vendorList');
+            const viewButtons = document.querySelectorAll('.view-btn');
+            
+            console.log('Elements found:', {
+                cardView: !!cardView,
+                listView: !!listView,
+                viewButtons: viewButtons.length
+            });
+            
+            // Remove active class from all buttons
+            viewButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
+            
+            // Toggle views
+            if (viewType === 'list') {
+                console.log('Switching to list view');
+                if (cardView) cardView.classList.add('hidden');
+                if (listView) listView.classList.remove('hidden');
+            } else {
+                console.log('Switching to card view');
+                if (cardView) cardView.classList.remove('hidden');
+                if (listView) listView.classList.add('hidden');
+            }
+        }
+        
+        let currentVendorIndex = 0;
+        
+        function showVendorDetails(vendorIndex) {
+            const vendor = sampleVendors[vendorIndex];
+            if (!vendor) return;
+            
+            currentVendorIndex = vendorIndex;
+            
+            // Update vendor profile data
+            document.getElementById('vendorAvatar').textContent = vendor.name.split(' ').map(word => word[0]).join('');
+            document.getElementById('vendorName').textContent = vendor.name;
+            document.getElementById('vendorEmail').textContent = vendor.email;
+            document.getElementById('vendorRating').textContent = `${vendor.rating} ⭐`;
+            document.getElementById('totalInvoices').textContent = vendor.invoiceCount;
+            document.getElementById('avgAmount').textContent = `$${vendor.avgAmount.toLocaleString()}`;
+            document.getElementById('lastInvoice').textContent = 'Jan 15, 2025';
+            document.getElementById('vendorStatus').textContent = 'Active';
+            document.getElementById('vendorContactEmail').textContent = vendor.email;
+            document.getElementById('vendorPhone').textContent = '+1 (555) 123-4567';
+            document.getElementById('vendorAddress').innerHTML = '123 Business St, Suite 100<br>New York, NY 10001';
+            
+            // Populate recent invoices
+            const vendorInvoices = sampleInvoices.filter(invoice => 
+                invoice.vendor.toLowerCase() === vendor.name.toLowerCase()
+            );
+            
+            const invoiceTableBody = document.getElementById('vendorInvoiceList');
+            if (vendorInvoices.length > 0) {
+                invoiceTableBody.innerHTML = vendorInvoices.slice(0, 5).map(invoice => `
+                    <div class="invoice-row">
+                        <div>${invoice.id}</div>
+                        <div>${invoice.date}</div>
+                        <div>$${invoice.amount.toLocaleString()}</div>
+                        <div>
+                            <span class="status-badge status-${invoice.status}">${invoice.status}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                invoiceTableBody.innerHTML = `
+                    <div class="invoice-row">
+                        <div colspan="4" style="text-align: center; color: var(--gray-500);">
+                            No recent invoices found
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Show vendor profile view
+            showView('vendor-profile', null);
+        }
+        
+        function editVendor(vendorIndex) {
+            currentVendorIndex = vendorIndex;
+            editCurrentVendor();
+        }
+        
+        function deleteVendor(vendorIndex) {
+            const vendor = sampleVendors[vendorIndex];
+            if (!vendor) return;
+            
+            if (confirm(`Are you sure you want to delete ${vendor.name}?\n\nThis action cannot be undone and will remove all associated data including invoices and transaction history.`)) {
+                showToast(
+                    `🗑️ ${vendor.name} Deleted`,
+                    'Vendor has been removed from the system.',
+                    'error'
+                );
+                // Refresh vendor list to reflect changes
+                loadVendorList();
+            }
+        }
+        
+        function editCurrentVendor() {
+            const vendor = sampleVendors[currentVendorIndex];
+            if (!vendor) return;
+            
+            // Populate form with current vendor data
+            document.getElementById('editVendorName').value = vendor.name;
+            document.getElementById('editVendorEmail').value = vendor.email;
+            document.getElementById('editVendorPhone').value = '+1 (555) 123-4567';
+            document.getElementById('editVendorAddress').value = '123 Business St, Suite 100\nNew York, NY 10001';
+            document.getElementById('editVendorRating').value = vendor.rating;
+            
+            // Show modal
+            document.getElementById('editVendorModal').classList.remove('hidden');
+        }
+        
+        function deleteCurrentVendor() {
+            const vendor = sampleVendors[currentVendorIndex];
+            if (!vendor) return;
+            
+            if (confirm(`Are you sure you want to delete ${vendor.name}?\n\nThis action cannot be undone and will remove all associated data.`)) {
+                showToast(
+                    `🗑️ ${vendor.name} Deleted`,
+                    'Vendor has been removed from the system.',
+                    'error'
+                );
+                // Go back to vendors list
+                showView('vendors', document.querySelector('[onclick*=vendors]'));
+            }
+        }
+        
+        function closeEditVendorModal() {
+            document.getElementById('editVendorModal').classList.add('hidden');
+        }
+        
+        function saveVendorChanges() {
+            const name = document.getElementById('editVendorName').value;
+            const email = document.getElementById('editVendorEmail').value;
+            const phone = document.getElementById('editVendorPhone').value;
+            const address = document.getElementById('editVendorAddress').value;
+            const rating = parseFloat(document.getElementById('editVendorRating').value);
+            
+            if (!name || !email) {
+                showToast('Validation Error', 'Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Update vendor data
+            sampleVendors[currentVendorIndex].name = name;
+            sampleVendors[currentVendorIndex].email = email;
+            sampleVendors[currentVendorIndex].rating = rating;
+            
+            // Update the profile view
+            showVendorDetails(currentVendorIndex);
+            
+            // Refresh vendor list
+            loadVendorList();
+            
+            // Close modal
+            closeEditVendorModal();
+            
+            showToast('✅ Vendor Updated', `${name} has been updated successfully.`, 'success');
+        }
+        
+        function editVendorNotes() {
+            const notesElement = document.getElementById('vendorNotes');
+            const currentNotes = notesElement.querySelector('p').textContent;
+            
+            // Populate form with current notes
+            document.getElementById('editVendorNotes').value = currentNotes;
+            
+            // Show modal
+            document.getElementById('editNotesModal').classList.remove('hidden');
+        }
+        
+        function closeEditNotesModal() {
+            document.getElementById('editNotesModal').classList.add('hidden');
+        }
+        
+        function saveNotesChanges() {
+            const notes = document.getElementById('editVendorNotes').value;
+            
+            // Update the notes display
+            const notesElement = document.getElementById('vendorNotes');
+            notesElement.querySelector('p').textContent = notes || 'No notes added yet.';
+            
+            // Close modal
+            closeEditNotesModal();
+            
+            showToast('📝 Notes Updated', 'Internal notes have been saved.', 'success');
+        }
+        
+        // Settings Functions
+        function showSettingsSection(sectionName, buttonElement) {
+            // Hide all sections
+            document.querySelectorAll('.settings-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.settings-nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionName + '-settings');
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Set active nav button
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
+        }
+        
+        function saveUserSettings() {
+            const firstName = document.getElementById('userFirstName').value;
+            const lastName = document.getElementById('userLastName').value;
+            const email = document.getElementById('userEmail').value;
+            const jobTitle = document.getElementById('userJobTitle').value;
+            const company = document.getElementById('userCompany').value;
+            
+            if (!firstName || !lastName || !email) {
+                showToast('Validation Error', 'Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            showToast('✅ Settings Saved', 'Your profile information has been updated successfully.', 'success');
         }
         
         // Quick Actions
@@ -2521,11 +5641,331 @@
         }
         
         function showReports() {
+            showView('analytics', document.querySelector('[onclick*=analytics]'));
+        }
+        
+        function switchChartTab(tabType, buttonElement) {
+            // Update active tab
+            document.querySelectorAll('.chart-tab').forEach(t => t.classList.remove('active'));
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
+            
+            // Update chart data based on tab type
+            const chart = document.getElementById('trendChart');
+            const bars = chart.querySelectorAll('.monthly-bar');
+            
+            let data;
+            switch(tabType) {
+                case 'weekly':
+                    data = [70, 85, 65, 90, 75, 95, 88];
+                    break;
+                case 'daily':
+                    data = [45, 60, 55, 75, 65, 85, 80, 90, 95, 88, 92, 100];
+                    break;
+                default: // monthly
+                    data = [45, 60, 55, 75, 65, 85, 80, 90, 95, 88, 92, 100];
+            }
+            
+            bars.forEach((bar, index) => {
+                if (index < data.length) {
+                    bar.style.setProperty('--bar-height', data[index] + '%');
+                    bar.setAttribute('data-value', Math.floor(data[index] * 28));
+                }
+            });
+            
             showToast(
-                'Analytics & Reports', 
-                'Comprehensive reporting dashboard with processing metrics, accuracy analysis, cost savings calculations, and vendor performance insights coming soon!',
+                'Chart Updated', 
+                `Switched to ${tabType} view showing processing trends over time.`,
                 'info'
             );
+        }
+        
+        // Period Picker Functions
+        function updateVolumeChart(period) {
+            console.log('Updating volume chart for period:', period);
+            const chart = document.querySelector('.processing-chart');
+            if (!chart) {
+                console.error('Chart not found');
+                return;
+            }
+            
+            const chartData = {
+                '7days': {
+                    data: [65, 80, 45, 90, 75, 95, 85],
+                    amounts: ['$45,620', '$56,240', '$31,500', '$63,000', '$52,500', '$66,500', '$59,500'],
+                    counts: ['182 invoices', '224 invoices', '126 invoices', '252 invoices', '210 invoices', '266 invoices', '238 invoices'],
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                },
+                '30days': {
+                    data: [70, 85, 60, 95, 80, 88, 92],
+                    amounts: ['$1.2M', '$1.8M', '$1.1M', '$2.1M', '$1.6M', '$1.9M', '$2.0M'],
+                    counts: ['4.2K invoices', '6.1K invoices', '3.8K invoices', '7.2K invoices', '5.5K invoices', '6.8K invoices', '7.0K invoices'],
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7']
+                },
+                '90days': {
+                    data: [75, 82, 68, 88, 79, 85, 91],
+                    amounts: ['$3.2M', '$4.1M', '$2.9M', '$4.8M', '$3.6M', '$4.3M', '$5.1M'],
+                    counts: ['12K invoices', '16K invoices', '11K invoices', '19K invoices', '14K invoices', '17K invoices', '21K invoices'],
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6', 'Month 7']
+                },
+                '1year': {
+                    data: [78, 85, 72, 90, 82, 88, 94],
+                    amounts: ['$12M', '$15M', '$10M', '$18M', '$13M', '$16M', '$20M'],
+                    counts: ['45K invoices', '58K invoices', '38K invoices', '72K invoices', '49K invoices', '65K invoices', '84K invoices'],
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4', 'Q5', 'Q6', 'Q7']
+                }
+            };
+
+            const selectedData = chartData[period] || chartData['7days'];
+            const bars = chart.querySelectorAll('.chart-bar');
+            
+            bars.forEach((bar, index) => {
+                if (index < selectedData.data.length) {
+                    bar.style.setProperty('--bar-height', selectedData.data[index] + '%');
+                    bar.setAttribute('data-amount', selectedData.amounts[index]);
+                    bar.setAttribute('data-count', selectedData.counts[index]);
+                    bar.setAttribute('title', `${selectedData.labels[index]}: ${selectedData.amounts[index]}`);
+                    bar.style.display = 'block';
+                } else {
+                    bar.style.display = 'none';
+                }
+            });
+            
+            console.log('Volume chart updated successfully');
+        }
+        
+        function updateAccuracyChart(period) {
+            console.log('Updating accuracy chart for period:', period);
+            const accuracyValue = document.querySelector('.accuracy-value');
+            const insights = document.querySelector('.ai-insights.compact .insights-list');
+            
+            if (!accuracyValue || !insights) {
+                console.error('Accuracy elements not found');
+                return;
+            }
+            
+            const accuracyData = {
+                'thismonth': {
+                    accuracy: '97.8%',
+                    insights: [
+                        'Accuracy improved 12% this month',
+                        'Best performance on invoice numbers', 
+                        'Learning from 847 user corrections'
+                    ]
+                },
+                'lastmonth': {
+                    accuracy: '95.2%',
+                    insights: [
+                        'Processed 2,156 invoices last month',
+                        'Strong performance on vendor names',
+                        'Identified 23 new vendor patterns'
+                    ]
+                },
+                'last3months': {
+                    accuracy: '94.1%',
+                    insights: [
+                        'Consistent 3% monthly improvement',
+                        'Vendor accuracy increased 15%',
+                        'Processed 6,847 invoices total'
+                    ]
+                },
+                'thisyear': {
+                    accuracy: '92.5%',
+                    insights: [
+                        'Year-over-year improvement: 18%',
+                        'Total invoices processed: 28,451',
+                        'AI learned 156 new patterns'
+                    ]
+                }
+            };
+            
+            const selectedData = accuracyData[period] || accuracyData['thismonth'];
+            accuracyValue.textContent = selectedData.accuracy;
+            
+            insights.innerHTML = selectedData.insights.map(insight => `<li>${insight}</li>`).join('');
+            
+            // Update the ring gradient
+            const ring = document.querySelector('.accuracy-ring.compact');
+            if (ring) {
+                const percentage = parseFloat(selectedData.accuracy);
+                const degrees = (percentage / 100) * 360;
+                ring.style.background = `conic-gradient(
+                    var(--success) 0deg ${degrees}deg,
+                    var(--gray-200) ${degrees}deg 360deg
+                )`;
+            }
+            
+            console.log('Accuracy chart updated successfully');
+        }
+        
+        // Settings Page Functions
+        function resetUserForm() {
+            // Reset form fields to default values
+            document.getElementById('userFirstName').value = 'Demo';
+            document.getElementById('userLastName').value = 'User';
+            document.getElementById('userEmail').value = 'demo@docbot.com';
+            document.getElementById('userJobTitle').value = 'Finance Manager';
+            document.getElementById('userCompany').value = 'DocBot Enterprise Demo';
+            
+            showToast('Form Reset', 'User settings form has been reset to default values.', 'info');
+        }
+        
+        function showUpgradePlan() {
+            showToast('Upgrade Plan', 'Plan upgrade options: Enterprise Pro Plus ($4,999/mo) - Unlimited processing, 50 seats, 1TB storage, Premium Support with dedicated account manager.', 'info');
+        }
+        
+        function showAllPlans() {
+            showToast('View All Plans', 'Available plans: Starter ($299/mo), Professional ($999/mo), Enterprise Pro ($2,999/mo), Enterprise Pro Plus ($4,999/mo). Contact sales for custom enterprise solutions.', 'info');
+        }
+        
+        function editPaymentMethod(index) {
+            showToast('Edit Payment Method', 'Payment method editor opening. Update card details, expiration date, and billing address. All changes are secured with bank-level encryption.', 'info');
+        }
+        
+        function removePaymentMethod(index) {
+            if (confirm('Are you sure you want to remove this payment method?\n\nThis action cannot be undone and may affect your billing.')) {
+                showToast('Payment Method Removed', 'Payment method has been securely removed from your account. Your primary payment method has been updated.', 'success');
+            }
+        }
+        
+        function addNewPaymentMethod() {
+            showToast('Add Payment Method', 'Add new payment method: Credit/Debit Card, Bank Transfer, or Corporate Account. All payment information is encrypted and PCI DSS compliant.', 'info');
+        }
+        
+        function downloadInvoice(invoiceId) {
+            showToast('Downloading Invoice', `Downloading invoice ${invoiceId}. PDF will be saved to your downloads folder with itemized billing details and tax information.`, 'success');
+        }
+        
+        function updatePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showToast('Validation Error', 'Please fill in all password fields.', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showToast('Password Mismatch', 'New password and confirmation do not match.', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                showToast('Password Too Short', 'Password must be at least 8 characters long.', 'error');
+                return;
+            }
+            
+            // Clear password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            showToast('Password Updated', 'Your password has been successfully updated. Please use your new password for future logins.', 'success');
+        }
+        
+        function configure2FA() {
+            showToast('Two-Factor Authentication', 'Configure 2FA: Scan QR code with Google Authenticator, Authy, or similar app. Backup codes will be provided for account recovery.', 'info');
+        }
+        
+        // Password strength checker
+        document.addEventListener('DOMContentLoaded', function() {
+            const newPasswordInput = document.getElementById('newPassword');
+            const strengthIndicator = document.getElementById('passwordStrength');
+            
+            if (newPasswordInput && strengthIndicator) {
+                newPasswordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    const strength = checkPasswordStrength(password);
+                    
+                    if (password.length > 0) {
+                        strengthIndicator.style.display = 'block';
+                        strengthIndicator.className = `password-strength strength-${strength.level}`;
+                        strengthIndicator.querySelector('.strength-text span').textContent = strength.text;
+                    } else {
+                        strengthIndicator.style.display = 'none';
+                    }
+                });
+            }
+        });
+        
+        function checkPasswordStrength(password) {
+            let score = 0;
+            
+            // Length check
+            if (password.length >= 8) score++;
+            if (password.length >= 12) score++;
+            
+            // Character variety checks
+            if (/[a-z]/.test(password)) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+            
+            // Determine strength level
+            if (score < 3) return { level: 'weak', text: 'Weak' };
+            if (score < 4) return { level: 'fair', text: 'Fair' };
+            if (score < 5) return { level: 'good', text: 'Good' };
+            return { level: 'strong', text: 'Strong' };
+        }
+        
+        // Additional Settings Functions
+        function savePreferences() {
+            showToast('Preferences Saved', 'Your application preferences have been updated successfully.', 'success');
+        }
+        
+        function resetPreferences() {
+            // Reset dropdowns to default values
+            document.querySelector('select[value="light"]').value = 'light';
+            document.querySelector('select[value="en"]').value = 'en';
+            document.querySelector('select[value="PST"]').value = 'PST';
+            
+            showToast('Preferences Reset', 'All preferences have been reset to default values.', 'info');
+        }
+        
+        function saveNotificationSettings() {
+            const email = document.getElementById('notificationEmail').value;
+            
+            if (!email) {
+                showToast('Validation Error', 'Please enter a valid notification email address.', 'error');
+                return;
+            }
+            
+            showToast('Notification Settings Saved', `Notification preferences saved. All notifications will be sent to ${email}`, 'success');
+        }
+        
+        function testNotifications() {
+            const email = document.getElementById('notificationEmail').value || 'demo@docbot.com';
+            showToast('Test Email Sent', `Test notification email sent to ${email}. Check your inbox in a few minutes.`, 'success');
+        }
+        
+        function cancelPasswordChange() {
+            // Clear all password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            // Hide password strength indicator
+            const strengthIndicator = document.getElementById('passwordStrength');
+            if (strengthIndicator) {
+                strengthIndicator.style.display = 'none';
+            }
+            
+            showToast('Password Change Cancelled', 'Password change has been cancelled.', 'info');
+        }
+        
+        function disable2FA() {
+            if (confirm('Are you sure you want to disable Two-Factor Authentication?\n\nThis will make your account less secure.')) {
+                showToast('2FA Disabled', 'Two-Factor Authentication has been disabled. We recommend keeping 2FA enabled for better security.', 'warning');
+                
+                // Update the badge to show disabled state
+                const badge = document.querySelector('.security-badge');
+                if (badge) {
+                    badge.textContent = 'Disabled';
+                    badge.className = 'security-badge disabled';
+                }
+            }
         }
     </script>
 </body>

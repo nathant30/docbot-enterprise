@@ -3,7 +3,7 @@ services:
     name: docbot-enterprise-frontend
     env: static
     plan: starter
-    repo: https://github.com/your-username/docbot-enterprise.git
+    repo: https://github.com/nathant30/docbot-enterprise.git
     branch: main
     rootDir: frontend
     buildCommand: npm ci && npm run build
